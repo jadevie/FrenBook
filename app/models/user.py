@@ -1,10 +1,9 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from sqlalchemy.types import Integer, DateTime, VARCHAR, DECIMAL, TEXT
-from sqlalchemy.schema import Column, ForeignKey
+from sqlalchemy.types import Integer, DateTime, VARCHAR, TEXT
+from sqlalchemy.schema import Column
 
 
 class User(db.Model, UserMixin):
