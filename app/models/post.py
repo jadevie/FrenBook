@@ -8,8 +8,8 @@ class Post(db.Model, UserMixin):
     __tablename__ = 'posts'
 
     id = Column(Integer, primary_key=True)
-    user_id=Column(Integer, ForeignKey('users.id'), ondelete='CASCADE')
-    body=Column(TEXT)
+    user_id=Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    body=Column(TEXT, nullable=False)
     created_at = Column(DateTime(timezone=True),
                         server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True),

@@ -15,8 +15,8 @@ class User(db.Model, UserMixin):
     username = Column(VARCHAR(40), nullable=False, unique=True)
     email = Column(VARCHAR(100), nullable=False, unique=True)
     hashed_password = Column(TEXT, nullable=False)
-    birthday=Column(DateTime)
-    gender=Column(TEXT)
+    birthday=Column(DateTime, nullable=False)
+    gender=Column(TEXT, nullable=False)
     profile_picture_url=Column(TEXT, nullable=True)
     created_at = Column(DateTime(timezone=True),
                         server_default=func.now(), nullable=False)

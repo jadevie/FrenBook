@@ -8,7 +8,7 @@ class PostImage(db.Model, UserMixin):
     __tablename__ = 'postImages'
 
     id = Column(Integer, primary_key=True)
-    post_id = Column(Integer, ForeignKey('posts.id'), ondelete='CASCADE')
+    post_id = Column(Integer, ForeignKey('posts.id', ondelete='CASCADE'), nullable=False)
     image_url = Column(TEXT, nullable=True)
     created_at = Column(DateTime(timezone=True),
                         server_default=func.now(), nullable=False)
