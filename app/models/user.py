@@ -1,15 +1,29 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
+from sqlalchemy.types import Integer, DateTime, VARCHAR, DECIMAL, TEXT
+from sqlalchemy.schema import Column, ForeignKey
 
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    id = Column(Integer, primary_key=True)
+    first_name= Column(VARCHAR(25), nullable=False)
+    last_name= Column(VARCHAR(25), nullable=False)
+    username = Column(VARCHAR(40), nullable=False, unique=True)
+    email = Column(VARCHAR(100), nullable=False, unique=True)
+    hashed_password = Column(TEXT, nullable=False)
+    birthday=Column(DateTime)
+    gender=Column(TEXT)
+    profile_picture_url=Column(TEXT, nullable=True)
+    created_at = Column(DateTime(timezone=True),
+                        server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True),
+                        server_default=func.now(), onupdate=func.now(),
+                        nullable=False)
 
     @property
     def password(self):
@@ -25,6 +39,11 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'birthday': self.birthday,
+            'gender': self.gender,
+            'profile_picture_url': self.profile_picture_url
         }
