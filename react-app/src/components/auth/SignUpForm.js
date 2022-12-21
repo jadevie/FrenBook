@@ -7,6 +7,10 @@ const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [gender, setGender] = useState('');
+  const [birthday, setBirthday] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
@@ -15,7 +19,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password, gender, birthday, first_name, last_name, profile_picture_url));
+      const data = await dispatch(signUp(firstName, lastName, username, email, password, gender, birthday));
       if (data) {
         setErrors(data);
       }
@@ -50,7 +54,7 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
+        <label>U </label>
         <input
           type='text'
           name='username'
@@ -65,6 +69,42 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
+        ></input>
+      </div>
+      <div>
+        <label>First Name</label>
+        <input
+          type='text'
+          name='firstName'
+          onChange={e => setFirstName(e.target.value)}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          name='lastName'
+          onChange={e => setLastName(e.target.value)}
+          value={lastName}
+        ></input>
+      </div>
+      <div>
+        <label>birthday</label>
+        <input
+          type='text'
+          name='birthday'
+          onChange={e => setBirthday(e.target.value)}
+          value={birthday}
+        ></input>
+      </div>
+      <div>
+        <label>Gender</label>
+        <input
+          type='text'
+          name='gender'
+          onChange={e => setGender(e.target.value)}
+          value={gender}
         ></input>
       </div>
       <div>
