@@ -1,6 +1,6 @@
-const SET_SIGNUP_MODAL = 'ui/setRegisterModal';
+const SET_SIGNUP_MODAL = 'ui/setSignUpModal';
 
-export const setSignUpModal = showRegisterModal => { return { type: SET_SIGNUP_MODAL, showRegisterModal }; };
+export const setSignUpModal = showSignUpModal => { return { type: SET_SIGNUP_MODAL, showSignUpModal }; };
 
 export default function uiReducer(state = {}, action) {
     switch (action.type) {

@@ -1,7 +1,9 @@
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
+import LogoutButton from "./components/auth/LogoutButton";
 import SignUpForm from "./components/auth/SignUpForm";
+import SplashPage from "./components/SplashPage/SplashPage";
 
 export default function AppRoutes() {
     return (
@@ -13,7 +15,8 @@ export default function AppRoutes() {
                 <SignUpForm />
             </Route>
             <Route path='/' exact={true} >
-                <h1>FrenBook</h1>
+                <SplashPage />
+                <LogoutButton />
             </Route>
         </Switch>
     );
