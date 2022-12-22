@@ -17,24 +17,6 @@ export const restoreUser = () => async dispatch => {
     }
 };
 
-// const initialState = { user: null };
-
-// export const authenticate = () => async (dispatch) => {
-//     const response = await fetch('/api/auth/', {
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     });
-//     if (response.ok) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return;
-//         }
-
-//         dispatch(setUser(data));
-//     }
-// }
-
 export const logIn = credentials => async dispatch => {
     const response = await csrfFetch('/api/session/login', {
         method: 'POST',
