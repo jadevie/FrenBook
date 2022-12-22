@@ -26,22 +26,6 @@ const SignUpForm = () => {
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
-
   if (user) {
     return <Redirect to='/' />;
   }
@@ -54,11 +38,11 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>U </label>
+        <label>Username </label>
         <input
           type='text'
           name='username'
-          onChange={updateUsername}
+          onChange={e => setUsername(e.target.value)}
           value={username}
         ></input>
       </div>
@@ -67,7 +51,7 @@ const SignUpForm = () => {
         <input
           type='text'
           name='email'
-          onChange={updateEmail}
+          onChange={e => setEmail(e.target.value)}
           value={email}
         ></input>
       </div>
@@ -90,7 +74,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>birthday</label>
+        <label>Birthday</label>
         <input
           type='text'
           name='birthday'
@@ -112,7 +96,7 @@ const SignUpForm = () => {
         <input
           type='password'
           name='password'
-          onChange={updatePassword}
+          onChange={e => setPassword(e.target.value)}
           value={password}
         ></input>
       </div>
@@ -121,13 +105,13 @@ const SignUpForm = () => {
         <input
           type='password'
           name='repeat_password'
-          onChange={updateRepeatPassword}
+          onChange={e => setRepeatPassword(e.target.value)}
           value={repeatPassword}
           required={true}
         ></input>
       </div>
       <button type='submit'>Sign Up</button>
-    </form>
+    </form >
   );
 };
 
