@@ -1,51 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
-import { authenticate } from './store/session';
+import styles from "./App.module.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { restoreUser } from "./store/session";
+import AppRoutes from "./AppRoutes";
+import Modals from "./components/Modals/Modals";
 
-function App() {
-  const [loaded, setLoaded] = useState(false);
+export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
+    dispatch(restoreUser());
   }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
+    <>
+      <div>
+        <AppRoutes />
+        <Modals />
+      </div>
+    </>
   );
 }
-
-export default App;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { login } from '../../store/session';
+import { logIn } from '../../store/session';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -12,18 +12,10 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
+    const data = await dispatch(logIn({email, password }));
     if (data) {
       setErrors(data);
     }
-  };
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
   };
 
   if (user) {
@@ -44,7 +36,7 @@ const LoginForm = () => {
           type='text'
           placeholder='Email'
           value={email}
-          onChange={updateEmail}
+          onChange={e => setEmail(e.target.value)}
         />
       </div>
       <div>
@@ -54,7 +46,7 @@ const LoginForm = () => {
           type='password'
           placeholder='Password'
           value={password}
-          onChange={updatePassword}
+          onChange={e => setPassword(e.target.value)}
         />
         <button type='submit'>Login</button>
       </div>
