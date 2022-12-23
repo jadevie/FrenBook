@@ -28,11 +28,6 @@ const LoginForm = () => {
       <div>
         <form onSubmit={onLogin} className={styles.wrapper}>
           <div>
-            {errors.length > 0 && errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
-          <div>
             <input className={styles.input}
               type='text'
               placeholder='Email'
@@ -50,6 +45,11 @@ const LoginForm = () => {
           </div>
           <div>
             <button type='submit' className={styles.loginBtn}>Login</button>
+          </div>
+          <div className={styles.errors}>
+            {errors.length > 0 && errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
           </div>
           <div className={styles.line}></div>
           <div>
