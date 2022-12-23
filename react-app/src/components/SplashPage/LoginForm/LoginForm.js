@@ -14,48 +14,51 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(logIn({ email, password }));
-    if (data) {
-      setErrors(data);
-    }
+    const data = await dispatch(logIn({ email, password }))
+      .catch(e => {
+        setErrors(e.errors);
+      });
   };
 
-  if (user) {
-    return <Redirect to='/' />;
-  }
+  if (user) return <Redirect to='/' />;
+
 
   return (
     <>
-
-      <form onSubmit={onLogin}>
-        <div>
-          {errors.length > 0 && errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div>
-        <div>
-          <label htmlFor='email'>Email</label>
-          <input
-            name='email'
-            type='text'
-            placeholder='Email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password</label>
-          <input
-            name='password'
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <button type='submit'>Login</button>
-        </div>
-      </form>
-      <button onClick={() => dispatch(setSignUpModal(true))}>Create new account</button>
+      <div>
+        <form onSubmit={onLogin} className={styles.wrapper}>
+          <div>
+            {errors.length > 0 && errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div>
+            <input className={styles.input}
+              type='text'
+              placeholder='Email'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <input className={styles.input}
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <button type='submit' className={styles.loginBtn}>Login</button>
+          </div>
+          <div className={styles.line}></div>
+          <div>
+            <button className={styles.signupBtn} onClick={() => dispatch(setSignUpModal(true))}>
+              Create new account
+            </button>
+          </div>
+        </form>
+      </div >
     </>
   );
 };

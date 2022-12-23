@@ -1,0 +1,15 @@
+.page {
+    height: 100vh;
+    background: #f0f2f5;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 72px 0 112px
+}
+
+.wrapper {
+    width: 980px;
+    display: flex;
+    justify-content: space-around;
+    padding: 0px auto;
+    padding: 20px 0
+}
+

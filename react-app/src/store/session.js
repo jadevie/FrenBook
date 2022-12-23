@@ -22,10 +22,11 @@ export const logIn = credentials => async dispatch => {
         method: 'POST',
         body: JSON.stringify(credentials)
     });
-
-    const user = await response.json();
-    await dispatch(setUser(user));
-    return user;
+    if (response.ok) {
+        const user = await response.json();
+        await dispatch(setUser(user));
+        return user;
+    }
 };
 
 export const logOut = () => async (dispatch) => {

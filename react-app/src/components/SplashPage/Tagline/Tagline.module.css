@@ -1,0 +1,19 @@
+.wrapper {
+    max-width: 550px;
+    padding: 112px 0 16px;
+}
+
+.frenbook {
+    font-size: 54px;
+    font-weight: bolder;
+    color: #1877F2
+}
+
+.tagline {
+    max-width: 400px;
+    font-size: 26px;
+    line-height: 32px;
+    color: #1c1e21;
+    padding: 0px 0px 20px;
+    font-weight: normal;
+}
