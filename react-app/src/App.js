@@ -1,4 +1,4 @@
-import styles from "./App.module.css";
+import "./App.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { restoreUser } from "./store/session";

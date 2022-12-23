@@ -1,0 +1,10 @@
+.logo {
+    color: #1877F2;
+    font-size: 36px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+}

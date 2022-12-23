@@ -1,0 +1,54 @@
+.wrapper {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    background-color: #FFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 4
+}
+
+.row {
+    display: flex;
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.row:hover {
+    background-color: #f7f7f7;
+}
+
+.iconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    font-size: 24px;
+}
+
+.name {
+    font-weight: bold;
+    padding: 10px 0;
+    font-size: 18px;
+}
+
+.logout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.profilePicture {
+    color: #6e6e6e
+}
