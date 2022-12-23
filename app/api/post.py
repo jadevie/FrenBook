@@ -31,7 +31,7 @@ def get_post_by_id(post_id):
     post = Post.query.get(post_id)
     return {'post': post.to_dict()}
 
-@bp.route('', methods=['POST'])
+@bp.route('/new', methods=['POST'])
 @login_required
 def create_post():
     '''
@@ -41,8 +41,10 @@ def create_post():
         return {
             "errors": { "message": "You have to log in to create post"}
             }
-
+    print( "_______________")
     form = PostForm()
+    print(form, "___________")
+
     form['csrf_token'].data = request.cookies['csrf_token']
     if (form.validate_on_submit()):
         post = Post (
@@ -52,6 +54,7 @@ def create_post():
         db.session.add(post)
         db.session.commit()
         return post.to_dict(), 201
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @bp.route('/<int:post_id>', methods=['PUT'])
@@ -83,7 +86,7 @@ def update_post(post_id):
     }, 400
 
 
-@bp.route('/<int:post_id>', methods=['DELETE'])
+@bp.route('/delete/<int:post_id>', methods=['DELETE'])
 @login_required
 def delete_post(post_id):
     '''
@@ -101,6 +104,7 @@ def delete_post(post_id):
             'message': 'You are not authorized to delete this post'
         }
         return error, 403
+
     if post.user_id == current_user.id:
         db.session.delete(post)
         db.session.commit()

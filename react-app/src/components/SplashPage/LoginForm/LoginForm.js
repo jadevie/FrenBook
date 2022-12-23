@@ -15,7 +15,7 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(logIn({ email, password }))
+    await dispatch(logIn({ email, password }))
       .catch(e => {
         setErrors(e.errors);
       })
@@ -25,7 +25,6 @@ const LoginForm = () => {
   };
 
   if (user) return <Redirect to='/' />;
-
 
   return (
     <>

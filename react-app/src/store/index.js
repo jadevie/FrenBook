@@ -7,7 +7,7 @@ import uiReducer from "./ui";
 const rootReducer = combineReducers({
     session: sessionReducer,
     ui: uiReducer,
-    posts: postsReducer
+    posts: postsReducer,
 });
 
 let enhancer;
