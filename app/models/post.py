@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.types import Integer, DateTime, TEXT
 from sqlalchemy.schema import Column, ForeignKey
-
+from sqlalchemy.orm import relationship
 class Post(db.Model, UserMixin):
     __tablename__ = 'posts'
 
@@ -16,11 +16,13 @@ class Post(db.Model, UserMixin):
                         server_default=func.now(), onupdate=func.now(),
                         nullable=False)
 
+    user = relationship("User", back_populates="posts")
+
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
             'body': self.body,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
         }
