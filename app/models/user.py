@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.types import Integer, DateTime, VARCHAR, TEXT
 from sqlalchemy.schema import Column
+from sqlalchemy.orm import relationship
 
 
 class User(db.Model, UserMixin):
@@ -23,6 +24,10 @@ class User(db.Model, UserMixin):
     updated_at = Column(DateTime(timezone=True),
                         server_default=func.now(), onupdate=func.now(),
                         nullable=False)
+
+    posts = relationship(
+        "Post", back_populates="user", cascade="all, delete-orphan")
+
 
     @property
     def password(self):
@@ -44,5 +49,12 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'birthday': self.birthday,
             'gender': self.gender,
-            'profile_picture_url': self.profile_picture_url
+            'profile_picture_url': self.profile_picture_url,
+            'posts' : [post.to_dict() for post in self.posts]
+        }
+
+    def to_dict_no_posts(self):
+        return {
+             'username': self.username,
+             'profile_picture_url': self.profile_picture_url
         }

@@ -34,8 +34,8 @@
 }
 
 .line {
-    border: 1px solid #dddfe2;
-    margin-top: 40px;
+    border: 0.5px solid #dddfe2;
+    margin-bottom: 10px;
 }
 
 .signupBtn {
@@ -44,7 +44,16 @@
     font-size: 18px;
     padding: 14px;
     width: 200px;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 85px;
     border-radius: 6px;
+}
+
+.errors {
+    min-height: 40px;
+    color: #F02849;
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 8px;
+    text-align: left;
 }

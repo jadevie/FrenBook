@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { logIn } from '../../../store/session';
 import { setSignUpModal } from '../../../store/ui';
+import { getPosts } from '../../../store/posts';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -17,6 +18,9 @@ const LoginForm = () => {
     const data = await dispatch(logIn({ email, password }))
       .catch(e => {
         setErrors(e.errors);
+      })
+      .then(() => {
+        dispatch(getPosts());
       });
   };
 
@@ -27,11 +31,6 @@ const LoginForm = () => {
     <>
       <div>
         <form onSubmit={onLogin} className={styles.wrapper}>
-          <div>
-            {errors.length > 0 && errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
           <div>
             <input className={styles.input}
               type='text'
@@ -50,6 +49,11 @@ const LoginForm = () => {
           </div>
           <div>
             <button type='submit' className={styles.loginBtn}>Login</button>
+          </div>
+          <div className={styles.errors}>
+            {errors.length > 0 && errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
           </div>
           <div className={styles.line}></div>
           <div>

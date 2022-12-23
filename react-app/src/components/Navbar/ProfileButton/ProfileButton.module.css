@@ -1,0 +1,8 @@
+.profileButton {
+    display: flex;
+    border: none;
+    cursor: pointer;
+    font-size: 40px;
+    color: rgb(110, 110, 110);
+    padding-top: 5px
+}
