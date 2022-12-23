@@ -17,33 +17,16 @@ export const restoreUser = () => async dispatch => {
     }
 };
 
-// const initialState = { user: null };
-
-// export const authenticate = () => async (dispatch) => {
-//     const response = await fetch('/api/auth/', {
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     });
-//     if (response.ok) {
-//         const data = await response.json();
-//         if (data.errors) {
-//             return;
-//         }
-
-//         dispatch(setUser(data));
-//     }
-// }
-
 export const logIn = credentials => async dispatch => {
     const response = await csrfFetch('/api/session/login', {
         method: 'POST',
         body: JSON.stringify(credentials)
     });
-
-    const user = await response.json();
-    await dispatch(setUser(user));
-    return user;
+    if (response.ok) {
+        const user = await response.json();
+        await dispatch(setUser(user));
+        return user;
+    }
 };
 
 export const logOut = () => async (dispatch) => {
@@ -52,43 +35,34 @@ export const logOut = () => async (dispatch) => {
 };
 
 
-export const signUp = (
-    firstName,
-    lastName,
-    username,
-    email,
-    password,
-    gender,
-    birthday) => async (dispatch) => {
-        const response = await csrfFetch('/api/users/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username,
-                email,
-                password,
-                gender,
-                first_name: firstName,
-                last_name: lastName,
-                birthday
-            }),
-        });
+export const signUp = (firstName, lastName, username, email, password, gender, birthday) => async (dispatch) => {
+    const response = await csrfFetch('/api/users/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username,
+            email,
+            password,
+            gender,
+            first_name: firstName,
+            last_name: lastName,
+            birthday
+        }),
+    });
 
-        if (response.ok) {
-            const data = await response.json();
-            dispatch(setUser(data));
-            return null;
-        } else if (response.status < 500) {
-            const data = await response.json();
-            if (data.errors) {
-                return data.errors;
-            }
-        } else {
-            return ['An error occurred. Please try again.'];
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data));
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
         }
-    };
+    } else {
+        return ['An error occurred. Please try again.'];
+    }
+};
 
 export default function sessionReducer(state = { user: null }, action) {
     const newState = { ...state };

@@ -1,19 +1,14 @@
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
-import LoginForm from "./components/auth/LoginForm";
-import SignUpForm from "./components/auth/SignUpForm";
+import LogoutButton from "./components/auth/LogoutButton";
+import SplashPage from "./components/SplashPage/SplashPage";
 
 export default function AppRoutes() {
     return (
         <Switch>
-            <Route path='/login' exact={true}>
-                <LoginForm />
-            </Route>
-            <Route path='/signup' exact={true}>
-                <SignUpForm />
-            </Route>
             <Route path='/' exact={true} >
-                <h1>FrenBook</h1>
+                <SplashPage />
+                <LogoutButton />
             </Route>
         </Switch>
     );
