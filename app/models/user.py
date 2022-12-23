@@ -52,3 +52,9 @@ class User(db.Model, UserMixin):
             'profile_picture_url': self.profile_picture_url,
             'posts' : [post.to_dict() for post in self.posts]
         }
+
+    def to_dict_no_posts(self):
+        return {
+             'username': self.username,
+             'profile_picture_url': self.profile_picture_url
+        }

@@ -1,0 +1,41 @@
+.NewFeed {}
+
+.createPostWrapper {
+    display: flex;
+    height: 120px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+
+.img {}
+
+.question {
+    background-color: #F0F2F5;
+    color: #65676B;
+    border-radius: 25px;
+    width: 400px;
+    height: 40px;
+    padding: 8px 12px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 17px;
+}
+
+.question:hover {
+    background-color: #e4e7eb;
+}
+
+.lineWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.line {
+    border: 1px solid #dddfe2;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: -60px;
+    margin-bottom: 70px;
+    padding: 0px 10px
+}
