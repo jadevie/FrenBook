@@ -5,9 +5,6 @@ const CREATE_POST = 'postDetails/CREATE_POST';
 const DELETE_POST = 'postDetails/DELETE_POST';
 const UPDATE_POST = 'postDetails/UPDATE_POST';
 
-// export const setPostDetails = id =>{
-//     return { type: SET_POST_DETAILS, id };
-// };
 
 export const setPostDetails = id => async dispatch => {
     const response = await fetch(`/api/posts/${id}`);
@@ -43,9 +40,9 @@ export const updatePost = (id, post) => async dispatch => {
     }
 };
 
-export const deletePost = postId => async dispatch => {
-    await csrfFetch(`/api/posts/${postId}`, { method: 'DELETE' });
-    dispatch({ type: DELETE_POST, postId });
+export const deletePost = id => async dispatch => {
+    await csrfFetch(`/api/posts/${id}`, { method: 'DELETE' });
+    dispatch({ type: DELETE_POST, id });
 };
 
 export default function postDetailsReducer(state = {}, action) {
@@ -62,7 +59,7 @@ export default function postDetailsReducer(state = {}, action) {
             return newState;
         case DELETE_POST:
             newState = { ...state };
-            delete newState[action.postId];
+            delete newState['post'];
             return newState;
         default:
             return state;

@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user, login_user, logout_user
-from app.models import db, Post
-from app.forms import PostForm
+from app.models import db, Post, PostImage
+from app.forms import PostForm, PostImageForm
 from .users import validation_errors_to_error_messages
 
 bp = Blueprint("posts", __name__, url_prefix="/posts")
@@ -110,3 +110,25 @@ def delete_post(post_id):
             "message": "Successfully deleted",
             "statusCode": 200
         }
+
+@bp.route('/<int:post_id>/images/new', methods=['POST'])
+@login_required
+def add_image(post_id):
+    post = Post.query.get(post_id)
+    print(post, ">>>>>>>>>>>>>>>>>>>>>>>>>>")
+    if not post:
+        return {'message': 'Post not found'}
+
+    form = PostImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if post.user_id == current_user.id:
+        if (form.validate_on_submit()):
+            post_image = PostImage (
+                post_id = post.id,
+                image_url = form.data['image_url']
+            )
+            db.session.add(post_image)
+            db.session.commit()
+            return post_image.to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400

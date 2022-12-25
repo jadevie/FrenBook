@@ -16,7 +16,8 @@ class Post(db.Model, UserMixin):
                         server_default=func.now(), onupdate=func.now(),
                         nullable=False)
 
-    user = relationship("User", foreign_keys=[user_id],back_populates="posts")
+    user = relationship("User", foreign_keys=[user_id], back_populates="posts")
+    images = relationship('PostImage', back_populates='post')
 
     def to_dict(self):
         return {
@@ -25,5 +26,6 @@ class Post(db.Model, UserMixin):
             'body': self.body,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
-            'user' : self.user.to_dict_no_posts()
+            'user' : self.user.to_dict_no_posts(),
+            'images': [image.to_dict() for image in self.images]
         }
