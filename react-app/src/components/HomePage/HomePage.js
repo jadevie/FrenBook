@@ -1,5 +1,5 @@
 import styles from './HomePage.module.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import { LeftPanel } from './LeftPanel/LeftPanel';
 import NewFeed from './NewFeed/NewFeed';

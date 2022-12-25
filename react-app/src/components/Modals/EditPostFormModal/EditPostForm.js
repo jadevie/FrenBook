@@ -1,24 +1,25 @@
-// import styles from './CreatePostForm.module.css';
+// import styles from './EditPostForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost } from '../../../store/postDetails';
+import { updatePost } from '../../../store/postDetails';
 import { getPosts } from '../../../store/posts';
-import { setCreatePostModal } from '../../../store/ui';
+import { setEditPostModal } from '../../../store/ui';
 
 
-const CreatePostForm = () => {
+const EditPostForm = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
+    const post = useSelector(state => state.postDetails.post);
 
-    const [body, setBody] = useState('');
+    const [body, setBody] = useState(post.body);
     const [errors, setErrors] = useState([]);
 
 
     const onSubmit = async e => {
         e.preventDefault();
-        const post = { body };
-        await dispatch(addPost(post))
-            .then(() => dispatch(setCreatePostModal(false)))
+        const updatedPost = { body };
+        await dispatch(updatePost(post.id, updatedPost))
+            .then(() => dispatch(setEditPostModal(false)))
             .then(() => dispatch(getPosts()))
             .catch(e => {
                 const errors = e.errors;
@@ -28,7 +29,7 @@ const CreatePostForm = () => {
 
     return (
         <div>
-            <div>Create Post</div>
+            <div>Edit Post</div>
             <div>{user.profile_picture_url}</div>
             <div>{user.username}</div>
             <form onSubmit={onSubmit}>
@@ -39,7 +40,6 @@ const CreatePostForm = () => {
                 </div>
                 <input
                     type='text'
-                    placeholder={`What's on your mind, ${user.first_name}`}
                     onChange={e => setBody(e.target.value)}
                     value={body}
                 />
@@ -49,4 +49,4 @@ const CreatePostForm = () => {
     );
 };
 
-export default CreatePostForm;
+export default EditPostForm;

@@ -1,4 +1,4 @@
-import styles from './RightPanel.module.css';
+// import styles from './RightPanel.module.css';
 import React from 'react';
 
 export const RightPanel = () => {

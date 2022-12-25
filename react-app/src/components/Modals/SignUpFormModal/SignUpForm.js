@@ -1,4 +1,4 @@
-import styles from './SignUpForm.module.css';
+// import styles from './SignUpForm.module.css';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -21,7 +21,7 @@ const SignUpForm = () => {
     const onSignUp = async (e) => {
         e.preventDefault();
         if (password === repeatPassword) {
-            const data = await dispatch(signUp(firstName, lastName, username, email, password, gender, birthday))
+            await dispatch(signUp(firstName, lastName, username, email, password, gender, birthday))
                 .then(() => dispatch(setSignUpModal(false)))
                 .catch(e => {
                     const errors = e.errors;

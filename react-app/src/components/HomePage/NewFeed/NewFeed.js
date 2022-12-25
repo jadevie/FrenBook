@@ -12,7 +12,7 @@ const NewFeed = () => {
 
     useEffect(() => {
         dispatch(getPosts());
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className={styles.NewFeed}>

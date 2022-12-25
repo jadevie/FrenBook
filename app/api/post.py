@@ -41,9 +41,7 @@ def create_post():
         return {
             "errors": { "message": "You have to log in to create post"}
             }
-    print( "_______________")
     form = PostForm()
-    print(form, "___________")
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if (form.validate_on_submit()):
@@ -86,7 +84,7 @@ def update_post(post_id):
     }, 400
 
 
-@bp.route('/delete/<int:post_id>', methods=['DELETE'])
+@bp.route('/<int:post_id>', methods=['DELETE'])
 @login_required
 def delete_post(post_id):
     '''

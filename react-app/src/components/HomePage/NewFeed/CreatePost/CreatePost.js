@@ -5,10 +5,10 @@ import { setCreatePostModal } from '../../../../store/ui';
 
 const CreatePost = ({ user }) => {
     const dispatch = useDispatch();
-    
-    const handleOnclick = e => {
+
+    const handleOnclick = async e => {
         e.preventDefault();
-        dispatch(setCreatePostModal(true));
+        await dispatch(setCreatePostModal(true));
     };
 
     return (
