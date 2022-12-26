@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf';
 const GET_POSTS = 'posts/GET_POSTS';
 const GET_POSTS_BY_USER = 'posts/GET_POSTS_BY_USER';
 
+
 export const getPosts = () => async dispatch => {
     const response = await csrfFetch(`/api/posts`);
     const posts = await response.json();

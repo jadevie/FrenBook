@@ -115,7 +115,6 @@ def delete_post(post_id):
 @login_required
 def add_image(post_id):
     post = Post.query.get(post_id)
-    print(post, ">>>>>>>>>>>>>>>>>>>>>>>>>>")
     if not post:
         return {'message': 'Post not found'}
 
