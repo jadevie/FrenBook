@@ -1,4 +1,4 @@
-// import styles from './CreatePostForm.module.css';
+import styles from './CreatePostForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPost, addPostImage } from '../../../store/postDetails';
@@ -70,9 +70,9 @@ const CreatePostForm = () => {
                     accept='image/*'
                 />
                 <img id='postImage' alt='postImage' src={preview && URL.createObjectURL(image)} />
-                <button type='submit'>Post</button>
+                <button type='submit' className={`${styles.postBtn} ${body ? styles.ready : styles.notReady}`}>Post</button>
             </form>
-        </div>
+        </div >
     );
 };
 

@@ -24,6 +24,10 @@ export const addPost = post => async dispatch => {
         dispatch({ type: CREATE_POST, post });
         return data;
     }
+    if (response.status >= 400) {
+        const errors = await response.json();
+        throw errors;
+    }
 };
 
 
@@ -41,6 +45,10 @@ export const addPostImage = (id, image, preview) => async dispatch => {
         dispatch({ type: ADD_IMAGE, postImage });
         return postImage;
     }
+    if (response.status >= 400) {
+        const errors = await response.json();
+        throw errors;
+    }
 };
 
 
@@ -54,6 +62,10 @@ export const updatePost = (id, post) => async dispatch => {
         const data = await response.json();
         dispatch({ type: UPDATE_POST, post });
         return data;
+    }
+    if (response.status >= 400) {
+        const errors = await response.json();
+        throw errors;
     }
 };
 
