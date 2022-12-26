@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost } from '../../../store/postDetails';
-import { getPosts } from '../../../store/posts';
+import { deletePost } from '../../../store/posts';
 import { setDeletePostModal } from '../../../store/ui';
+
 
 
 const DeletePostForm = () => {
@@ -13,7 +14,6 @@ const DeletePostForm = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         await dispatch(deletePost(post.id))
-            // .then(() => dispatch(getPosts()))
             .then(() => dispatch(setDeletePostModal(false)))
             .catch(e => {
                 const errors = e.errors;

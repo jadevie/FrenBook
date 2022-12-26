@@ -1,7 +1,6 @@
 import styles from './LoginForm.module.css';
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { logIn } from '../../../store/session';
 import { setSignUpModal } from '../../../store/ui';
 import { getPosts } from '../../../store/posts';
@@ -10,7 +9,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -24,7 +23,7 @@ const LoginForm = () => {
       });
   };
 
-  if (user) return <Redirect to='/' />;
+  // if (user) return <Redirect to='/' />;
 
   return (
     <>

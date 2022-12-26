@@ -19,7 +19,7 @@ const AllPosts = ({ user }) => {
                 </div>
                 <div>{post.created_at}</div>
                 <div>{post.body}</div>
-                <div>{post.images.length ? post.images.map(image => <img id='postImage' alt='postImage' src={image.image_url} />) : null} </div>
+                <div>{post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='postImage' src={image.image_url} />) : null} </div>
             </div>)}
         </div>
     );
