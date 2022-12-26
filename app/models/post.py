@@ -17,7 +17,7 @@ class Post(db.Model, UserMixin):
                         nullable=False)
 
     user = relationship("User", foreign_keys=[user_id], back_populates="posts")
-    images = relationship('PostImage', back_populates='post')
+    images = relationship('PostImage',cascade="all, delete-orphan", back_populates='post')
 
     def to_dict(self):
         return {
