@@ -1,7 +1,7 @@
 from flask import Blueprint, request
-from flask_login import login_required, current_user, login_user, logout_user
-from app.models import db, Post, PostImage
-from app.forms import PostForm, PostImageForm
+from flask_login import login_required, current_user
+from app.models import db, Post, PostImage, Comment
+from app.forms import PostForm, PostImageForm, CommentForm
 from .users import validation_errors_to_error_messages
 
 bp = Blueprint("posts", __name__, url_prefix="/posts")
@@ -131,3 +131,24 @@ def add_image(post_id):
             db.session.commit()
             return post_image.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@bp.route('/<int:post_id>/comments', methods =['POST'])
+@login_required
+def post_comment(post_id):
+    post = Post.query.get(post_id)
+    if not post:
+        return {'message': 'Post not found'}
+
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if (form.validate_on_submit()):
+        comment = Comment(
+        user_id = current_user.id,
+        post_id = post.id,
+        body = form.data['body']
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400

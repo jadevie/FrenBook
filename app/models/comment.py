@@ -3,6 +3,7 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.types import Integer, DateTime, TEXT
 from sqlalchemy.schema import Column, ForeignKey
+from sqlalchemy.orm import relationship
 
 class Comment(db.Model, UserMixin):
     __tablename__ = 'comments'
@@ -16,6 +17,7 @@ class Comment(db.Model, UserMixin):
     updated_at = Column(DateTime(timezone=True),
                         server_default=func.now(), onupdate=func.now(),
                         nullable=False)
+    post = relationship('Post', back_populates='comments')
 
     def to_dict(self):
         return {

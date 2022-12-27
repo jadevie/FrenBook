@@ -4,6 +4,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.types import Integer, DateTime, TEXT
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.orm import relationship
+
 class Post(db.Model, UserMixin):
     __tablename__ = 'posts'
 
@@ -18,6 +19,7 @@ class Post(db.Model, UserMixin):
 
     user = relationship("User", foreign_keys=[user_id], back_populates="posts")
     images = relationship('PostImage',cascade="all, delete-orphan", back_populates='post')
+    comments = relationship('Comment',cascade ='all, delete-orphan', back_populates='post')
 
     def to_dict(self):
         return {
