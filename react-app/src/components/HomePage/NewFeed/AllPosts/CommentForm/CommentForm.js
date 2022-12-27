@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addComment } from '../../../../../store/postDetails';
+import { addComment } from '../../../../../store/posts';
 import { getPosts } from '../../../../../store/posts';
 
 

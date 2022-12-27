@@ -42,7 +42,7 @@ export const signUp = (
     password,
     gender,
     birthday) => async (dispatch) => {
-        const response = await csrfFetch('/api/users/signup', {
+        const response = await csrfFetch('/api/session/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -28,4 +28,4 @@ class SignUpForm(FlaskForm):
     password = PasswordField('password', validators=[DataRequired()])
     birthday = DateField('birthday')
     gender = StringField('gender')
-    profile_picture_url = URLField('profile picture', validators=[URL()])
+    # profile_picture_url = URLField('profile picture', validators=[URL()])

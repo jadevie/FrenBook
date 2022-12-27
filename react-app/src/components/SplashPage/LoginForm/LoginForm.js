@@ -51,13 +51,13 @@ const LoginForm = () => {
               <div key={ind}>{error}</div>
             ))}
           </div>
-          <div className={styles.line}></div>
-          <div>
-            <button className={styles.signupBtn} onClick={() => dispatch(setSignUpModal(true))}>
-              Create new account
-            </button>
-          </div>
         </form>
+        <div className={styles.line}></div>
+        <div>
+          <button className={styles.signupBtn} onClick={() => dispatch(setSignUpModal(true))}>
+            Create new account
+          </button>
+        </div>
       </div >
     </>
   );

@@ -1,7 +1,7 @@
 import styles from './CreatePostForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost, addPostImage } from '../../../store/postDetails';
+import { addPost, addPostImage } from '../../../store/posts';
 import { getPosts } from '../../../store/posts';
 import { setCreatePostModal } from '../../../store/ui';
 

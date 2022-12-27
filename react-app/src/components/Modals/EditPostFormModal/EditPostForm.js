@@ -1,7 +1,7 @@
 // import styles from './EditPostForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePost } from '../../../store/postDetails';
+import { updatePost } from '../../../store/posts';
 import { getPosts } from '../../../store/posts';
 import { setEditPostModal } from '../../../store/ui';
 

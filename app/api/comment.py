@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Comment
 from app.forms import CommentForm
-from .users import validation_errors_to_error_messages
+from .session import validation_errors_to_error_messages
 
 bp = Blueprint("comments", __name__, url_prefix="/comments")
 
