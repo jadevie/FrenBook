@@ -29,5 +29,6 @@ class Post(db.Model, UserMixin):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'user' : self.user.to_dict_no_posts(),
-            'images': [image.to_dict() for image in self.images]
+            'images': [image.to_dict() for image in self.images],
+            'comments': [comment.to_dict() for comment in self.comments]
         }

@@ -7,6 +7,7 @@ const DropdownMenu = ({ user }) => {
     const dispatch = useDispatch();
 
     const onLogout = async (e) => {
+        e.preventDefault();
         await dispatch(logOut());
     };
 

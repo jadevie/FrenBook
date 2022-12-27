@@ -8,9 +8,6 @@ import { Route } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import SplashPage from "./components/SplashPage/SplashPage";
 
-
-
-
 export default function App() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);

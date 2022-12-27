@@ -2,6 +2,7 @@ const SET_POST_DETAILS = 'postDetails/SET_POST_DETAILS';
 const CREATE_POST = 'postDetails/CREATE_POST';
 const ADD_IMAGE = 'postDetails/ADD_IMAGE';
 const UPDATE_POST = 'postDetails/UPDATE_POST';
+const ADD_COMMENT = 'postDetails/ADD_COMMENT';
 
 
 export const setPostDetails = id => async dispatch => {
@@ -51,6 +52,24 @@ export const addPostImage = (id, image, preview) => async dispatch => {
     }
 };
 
+export const addComment = (id, comment) => async dispatch => {
+    const response = await fetch(`/api/posts/${id}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    });
+    console.log(comment);
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: ADD_COMMENT, comment });
+        return data;
+    }
+    if (response.status >= 400) {
+        const errors = await response.json();
+        throw errors;
+    }
+};
 
 export const updatePost = (id, post) => async dispatch => {
     const response = await fetch(`/api/posts/${id}`, {

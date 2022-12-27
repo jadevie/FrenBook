@@ -5,11 +5,11 @@ import { logIn } from '../../../store/session';
 import { setSignUpModal } from '../../../store/ui';
 import { getPosts } from '../../../store/posts';
 
+
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -22,8 +22,6 @@ const LoginForm = () => {
         dispatch(getPosts());
       });
   };
-
-  // if (user) return <Redirect to='/' />;
 
   return (
     <>

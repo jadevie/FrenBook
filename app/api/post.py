@@ -92,9 +92,7 @@ def delete_post(post_id):
     '''
     post = Post.query.get(post_id)
     if not post:
-        error = {
-            "message": "Post not found"
-        }
+        error = {"message": "Post couldn't be found" }
         return error, 404
 
     if post.user_id != current_user.id:
@@ -116,7 +114,7 @@ def delete_post(post_id):
 def add_image(post_id):
     post = Post.query.get(post_id)
     if not post:
-        return {'message': 'Post not found'}
+        return {"message": "Post couldn't be found"}
 
     form = PostImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -135,9 +133,12 @@ def add_image(post_id):
 @bp.route('/<int:post_id>/comments', methods =['POST'])
 @login_required
 def post_comment(post_id):
+    if not current_user.is_authenticated:
+        return {"errors": { "message": "You have to leave a comment to this post"}}
+
     post = Post.query.get(post_id)
     if not post:
-        return {'message': 'Post not found'}
+        return {"message": "Post couldn't be found"}
 
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -152,3 +153,8 @@ def post_comment(post_id):
         db.session.commit()
         return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# @bp.route('/<int:post_id>/comments')
+# @login_required
+# def get_comments(post_id):
+#     post = Post.query.get(post_id)

@@ -14,7 +14,7 @@ def update_comment(comment_id):
 
     comment = Comment.query.get(comment_id)
     if not comment:
-        return {'message': 'Comment not found'}
+        return {"message": "Comment couldn't be found"}
 
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -26,7 +26,7 @@ def update_comment(comment_id):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
     return {
         'errors': {
-            'user': "Must own the comment to update it"
+            'user': "MYou're not authorized to edit this comment"
         }
     }, 400
 
@@ -38,11 +38,11 @@ def delete_comment(comment_id):
 
     comment = Comment.query.get(comment_id)
     if not comment:
-        return {'message': 'Comment not found'}, 404
+        return {'message': "Comment couldn't be found"}, 404
 
     if comment.user_id != current_user.id:
         error = {
-            'message': 'You are not authorized to delete this post'
+            'message': 'You are not authorized to delete this comment'
         }
         return error, 403
 

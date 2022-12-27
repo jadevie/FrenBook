@@ -1,13 +1,10 @@
-import { csrfFetch } from './csrf';
-
-
 const GET_POSTS = 'posts/GET_POSTS';
 // const GET_POSTS_BY_USER = 'posts/GET_POSTS_BY_USER';
 const DELETE_POST = 'postDetails/DELETE_POST';
 
 
 export const getPosts = () => async dispatch => {
-    const response = await csrfFetch(`/api/posts`);
+    const response = await fetch(`/api/posts`);
     const posts = await response.json();
     dispatch({ type: GET_POSTS, posts });
 };
