@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 320px;
+    height: 330px;
     background-color: #FFF;
     word-wrap: break-word;
     margin-top: 40px;
@@ -44,16 +44,23 @@
     font-size: 18px;
     padding: 14px;
     width: 200px;
-    margin-top: 10px;
     margin-left: 85px;
     border-radius: 6px;
 }
 
 .errors {
-    min-height: 40px;
+    height: 40px;
     color: #F02849;
     font-size: 13px;
     line-height: 16px;
     margin-top: 8px;
     text-align: left;
+}
+
+.demoUser {
+    width: 200px;
+    margin-left: 85px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 10px;
 }

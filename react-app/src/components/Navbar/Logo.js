@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 export const Logo = () => {
     return (
-        <div>
-            <Link to="/">
-                <span className={styles.logo}>FB</span>
+        <div className={styles.link}>
+            <Link to="/home" style={{ textDecoration: 'none' }}>
+                <span className={styles.logo}>fb</span>
             </Link>
-        </div>
+        </div >
     );
 };

@@ -50,5 +50,8 @@
 }
 
 .profilePicture {
-    color: #6e6e6e
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
 }
