@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import TextAreaField
+from wtforms.fields import StringField
 from wtforms.validators import DataRequired
 
 class PostForm(FlaskForm):
-    body = TextAreaField('body', validators=[DataRequired()])
+    body = StringField('body', validators=[DataRequired()])

@@ -1,11 +1,9 @@
 import styles from './HomePage.module.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import { LeftPanel } from './LeftPanel/LeftPanel';
 import NewFeed from './NewFeed/NewFeed';
 import { RightPanel } from './RightPanel/RightPanel';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPosts } from '../../store/posts';
 
 
 const HomePage = () => {

@@ -1,0 +1,8 @@
+.ready {
+    cursor: pointer;
+}
+
+
+.notReady:hover {
+    cursor: not-allowed
+}

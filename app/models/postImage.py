@@ -3,6 +3,7 @@ from flask_login import UserMixin
 from sqlalchemy.types import Integer, TEXT, DateTime
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 
 class PostImage(db.Model, UserMixin):
     __tablename__ = 'postImages'
@@ -16,10 +17,11 @@ class PostImage(db.Model, UserMixin):
                         server_default=func.now(), onupdate=func.now(),
                         nullable=False)
 
+    post = relationship('Post', back_populates='images')
+
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
             'post_id': self.post_id,
-            'comment_id': self.comment_id
+            'image_url': self.image_url
         }

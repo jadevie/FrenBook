@@ -7,7 +7,7 @@
 
 .HomePage {
     display: grid;
-    grid-template-columns: 0.75fr 1.5fr 0.75fr;
+    grid-template-columns: 0.75fr 500px 0.75fr;
     gap: 10px 9px;
     width: 100%;
     height: 100vh;

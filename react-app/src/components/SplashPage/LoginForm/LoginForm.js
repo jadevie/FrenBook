@@ -1,21 +1,20 @@
 import styles from './LoginForm.module.css';
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { logIn } from '../../../store/session';
 import { setSignUpModal } from '../../../store/ui';
 import { getPosts } from '../../../store/posts';
+
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(logIn({ email, password }))
+    await dispatch(logIn({ email, password }))
       .catch(e => {
         setErrors(e.errors);
       })
@@ -23,9 +22,6 @@ const LoginForm = () => {
         dispatch(getPosts());
       });
   };
-
-  if (user) return <Redirect to='/' />;
-
 
   return (
     <>
@@ -55,13 +51,13 @@ const LoginForm = () => {
               <div key={ind}>{error}</div>
             ))}
           </div>
-          <div className={styles.line}></div>
-          <div>
-            <button className={styles.signupBtn} onClick={() => dispatch(setSignUpModal(true))}>
-              Create new account
-            </button>
-          </div>
         </form>
+        <div className={styles.line}></div>
+        <div>
+          <button className={styles.signupBtn} onClick={() => dispatch(setSignUpModal(true))}>
+            Create new account
+          </button>
+        </div>
       </div >
     </>
   );

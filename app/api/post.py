@@ -1,8 +1,8 @@
 from flask import Blueprint, request
-from flask_login import login_required, current_user, login_user, logout_user
-from app.models import db, Post
-from app.forms import PostForm
-from .users import validation_errors_to_error_messages
+from flask_login import login_required, current_user
+from app.models import db, Post, PostImage, Comment
+from app.forms import PostForm, PostImageForm, CommentForm
+from .session import validation_errors_to_error_messages
 
 bp = Blueprint("posts", __name__, url_prefix="/posts")
 
@@ -31,7 +31,7 @@ def get_post_by_id(post_id):
     post = Post.query.get(post_id)
     return {'post': post.to_dict()}
 
-@bp.route('', methods=['POST'])
+@bp.route('/new', methods=['POST'])
 @login_required
 def create_post():
     '''
@@ -41,8 +41,8 @@ def create_post():
         return {
             "errors": { "message": "You have to log in to create post"}
             }
-
     form = PostForm()
+
     form['csrf_token'].data = request.cookies['csrf_token']
     if (form.validate_on_submit()):
         post = Post (
@@ -52,6 +52,7 @@ def create_post():
         db.session.add(post)
         db.session.commit()
         return post.to_dict(), 201
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @bp.route('/<int:post_id>', methods=['PUT'])
@@ -91,9 +92,7 @@ def delete_post(post_id):
     '''
     post = Post.query.get(post_id)
     if not post:
-        error = {
-            "message": "Post not found"
-        }
+        error = {"message": "Post couldn't be found" }
         return error, 404
 
     if post.user_id != current_user.id:
@@ -101,6 +100,7 @@ def delete_post(post_id):
             'message': 'You are not authorized to delete this post'
         }
         return error, 403
+
     if post.user_id == current_user.id:
         db.session.delete(post)
         db.session.commit()
@@ -108,3 +108,53 @@ def delete_post(post_id):
             "message": "Successfully deleted",
             "statusCode": 200
         }
+
+@bp.route('/<int:post_id>/images/new', methods=['POST'])
+@login_required
+def add_image(post_id):
+    post = Post.query.get(post_id)
+    if not post:
+        return {"message": "Post couldn't be found"}
+
+    form = PostImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if post.user_id == current_user.id:
+        if (form.validate_on_submit()):
+            post_image = PostImage (
+                post_id = post.id,
+                image_url = form.data['image_url']
+            )
+            db.session.add(post_image)
+            db.session.commit()
+            return post_image.to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@bp.route('/<int:post_id>/comments', methods =['POST'])
+@login_required
+def post_comment(post_id):
+    if not current_user.is_authenticated:
+        return {"errors": { "message": "You have to leave a comment to this post"}}
+
+    post = Post.query.get(post_id)
+    if not post:
+        return {"message": "Post couldn't be found"}
+
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if (form.validate_on_submit()):
+        comment = Comment(
+        user_id = current_user.id,
+        post_id = post.id,
+        body = form.data['body']
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# @bp.route('/<int:post_id>/comments')
+# @login_required
+# def get_comments(post_id):
+#     post = Post.query.get(post_id)
