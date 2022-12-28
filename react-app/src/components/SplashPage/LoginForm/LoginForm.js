@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../store/session';
 import { setSignUpModal } from '../../../store/ui';
-import { getPosts } from '../../../store/posts';
 
 
 const LoginForm = () => {

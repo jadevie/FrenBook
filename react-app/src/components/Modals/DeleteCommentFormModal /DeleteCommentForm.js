@@ -1,12 +1,12 @@
 // import React, { useState } from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../store/posts';
 import { setDeleteCommentModal } from '../../../store/ui';
 
 const DeleteCommentForm = () => {
     const dispatch = useDispatch();
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
     const comment = useSelector(state => state.commentDetails.comment);
 
     const handleSubmit = async e => {

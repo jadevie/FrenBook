@@ -1,6 +1,5 @@
 import styles from './CommentEllipsis.module.css';
 import React, { useEffect, useState } from 'react';
-import EditCommentForm from '../EditCommentForm/EditCommentForm';
 import DropDownCommentManager from './DropdownCommentManager/DropDownCommentManager';
 
 export const CommentEllipsis = ({ comment }) => {
@@ -15,7 +14,7 @@ export const CommentEllipsis = ({ comment }) => {
 
     return (
         <div>
-            <button onClick={() => setShowMenu(true)}>
+            <button onClick={() => setShowMenu(true)} className={styles.ellipsis}>
                 <i className="fa-solid fa-ellipsis"></i>
             </button>
             {showMenu && <DropDownCommentManager comment={comment} />}

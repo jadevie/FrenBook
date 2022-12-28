@@ -8,7 +8,7 @@ const EditCommentForm = ({ comment }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState(comment.body);
     const [id, setId] = useState(0);
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
 
     const handleOnSubmit = async e => {
         e.preventDefault();

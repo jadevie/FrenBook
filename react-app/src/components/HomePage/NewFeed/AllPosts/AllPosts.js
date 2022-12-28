@@ -22,45 +22,47 @@ const AllPosts = ({ user }) => {
 
     return (
         <div>{postArray.map((post, i) =>
-            <div className={styles.postWrapper} key={i}>
-                <div className={styles.headerWrapper} >
-                    <div className={styles.userImage}>
-                        <img src={`${post.user.profile_picture_url}`} alt='profile' className={styles.userImage} />
+            <div key={i}>
+                <div className={styles.postWrapper}>
+                    <div className={styles.headerWrapper} >
+                        <div className={styles.userImage}>
+                            <img src={`${post.user.profile_picture_url}`} alt='profile' className={styles.userImage} />
+                        </div>
+                        <div className={styles.nameAndTimeWrapper}>
+                            <div className={styles.name}>{post.user.username}</div>
+                            <div className={styles.time}>{post.created_at}</div>
+                        </div>
+                        <div className={styles.ellipsis}>
+                            {user.id === post.user_id ? <Ellipsis post={post} /> : null}
+                        </div>
                     </div>
-                    <div className={styles.nameAndTimeWrapper}>
-                        <div>{post.user.username}</div>
-                        <div>{post.created_at}</div>
+
+                    <div className={styles.body}>{post.body}</div>
+
+                    <div className={styles.postImage}>
+                        {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='postImage' src={image.image_url} />) : null}
                     </div>
-                    <div>
-                        {user.id === post.user_id ? <Ellipsis post={post} /> : null}
+
+                    <div className={styles.comments}>
+                        {post.comments.length ? post.comments.map((comment, i) =>
+                            <div key={i}>
+                                <div className={styles.userImageSmall}>
+                                    <img src={`${comment.user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
+                                </div>
+                                {comment.body}
+                                {comment.user_id === user.id ? <CommentEllipsis comment={comment} /> : null}
+                                {<div id='editComment' className={editComment && editComment.id === comment.id ? styles.showEditComment : styles.hideEditComment}>
+                                    {<EditCommentForm comment={comment} />}
+                                </div>}
+                            </div>) : null}
                     </div>
-                </div>
 
-                <div>{post.body}</div>
-
-                <div>
-                    {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='postImage' src={image.image_url} />) : null}
-                </div>
-
-                <div className={styles.comments}>
-                    {post.comments.length ? post.comments.map((comment, i) =>
-                        <div key={i}>
-                            <div className={styles.userImageSmall}>
-                                <img src={`${comment.user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
-                            </div>
-                            {comment.body}
-                            {comment.user_id === user.id ? <CommentEllipsis comment={comment} /> : null}
-                            {<div id='editComment' className={editComment && editComment.id === comment.id ? styles.showEditComment : styles.hideEditComment}>
-                                {<EditCommentForm comment={comment} />}
-                            </div>}
-                        </div>) : null}
-                </div>
-
-                <div className={styles.commentForm}>
-                    <div className={styles.userImageSmall}>
-                        <img src={`${post.user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
+                    <div className={styles.commentForm}>
+                        <div className={styles.userImageSmall}>
+                            <img src={`${post.user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
+                        </div>
+                        <CommentForm post={post} />
                     </div>
-                    <CommentForm post={post} />
                 </div>
             </div>)}
         </div>

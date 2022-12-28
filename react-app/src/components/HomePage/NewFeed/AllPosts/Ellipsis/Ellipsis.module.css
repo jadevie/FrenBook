@@ -1,0 +1,11 @@
+.ellipsis {
+    font-size: 20px;
+    color: #65676B;
+    border: 1px solid transparent;
+    padding: 5px 8px;
+}
+
+.ellipsis:hover {
+    background-color: #e4e7eb;
+    border-radius: 50%;
+}
