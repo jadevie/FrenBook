@@ -18,11 +18,13 @@ class Comment(db.Model, UserMixin):
                         server_default=func.now(), onupdate=func.now(),
                         nullable=False)
     post = relationship('Post', back_populates='comments')
+    user = relationship('User', back_populates='comments')
 
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'user': self.user.to_dict_no_posts(),
             'post_id': self.post_id,
             'body': self.body,
             'created_at': self.created_at,
