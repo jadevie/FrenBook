@@ -90,26 +90,51 @@ export const deletePost = postId => async dispatch => {
     dispatch({ type: DELETE_POST, postId });
 };
 
-export default function postsReducer(state = {}, action) {
+const initialState = { allPosts: {}, post: {} };
+export default function postsReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case GET_POSTS:
-            newState = { ...state };
-            action.posts.posts.forEach(post => newState[post.id] = post);
+            newState = { allPosts: {}, post: {} };
+            action.posts.posts.forEach(post => newState.allPosts[post.id] = post);
             return newState;
-        // case CREATE_POST:
-        //     newState = { ...state };
-        //     newState[action.post.id] = action.post;
-        //     return newState;
-        // case ADD_IMAGE:
-        //     newState = { ...state };
-        //     newState[action.postImage] = action.postImage;
-        //     return newState;
+        case CREATE_POST:
+            newState = { ...state };
+            newState.post = action.post;
+            return newState;
+        case ADD_IMAGE:
+            newState = { ...state };
+            newState.post.images = action.postImage;
+            return newState;
         case DELETE_POST:
             newState = { ...state };
-            delete newState[action.postId];
+            delete newState.allPosts[action.postId];
             return newState;
         default:
             return state;
     }
 }
+
+// export default function postsReducer(state = {}, action) {
+//     let newState;
+//     switch (action.type) {
+//         case GET_POSTS:
+//             newState = { ...state };
+//             action.posts.posts.forEach(post => newState[post.id] = post);
+//             return newState;
+//         // case CREATE_POST:
+//         //     newState = { ...state };
+//         //     newState[action.post.id] = action.post;
+//         //     return newState;
+//         // case ADD_IMAGE:
+//         //     newState = { ...state };
+//         //     newState[action.postImage] = action.postImage;
+//         //     return newState;
+//         case DELETE_POST:
+//             newState = { ...state };
+//             delete newState[action.postId];
+//             return newState;
+//         default:
+//             return state;
+//     }
+// }

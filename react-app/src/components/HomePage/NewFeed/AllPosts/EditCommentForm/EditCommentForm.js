@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addComment } from '../../../../../store/posts';
+import { editComment } from '../../../../../store/commentDetails';
 import { getPosts } from '../../../../../store/posts';
 
 
-const CommentForm = ({ post }) => {
+const EditCommentForm = ({ comment }) => {
     const dispatch = useDispatch();
-    const [body, setBody] = useState('');
+    const [body, setBody] = useState(comment.body);
     const [id, setId] = useState(0);
     const [errors, setErrors] = useState([]);
 
     const handleOnSubmit = async e => {
         e.preventDefault();
         const comment = { body };
-        await dispatch(addComment(id, comment))
-            .then(() => setBody(''))
+        await dispatch(editComment(id, comment))
+            .then(() => document.getElementById('editComment').style.display = 'none');
+        await dispatch(getPosts())
             .catch(e => {
                 const errors = e.errors;
                 setErrors(errors);
             });
-        await dispatch(getPosts());
     };
 
     return (
@@ -33,9 +33,8 @@ const CommentForm = ({ post }) => {
                     </div>
                     <input
                         type='text'
-                        placeholder='Write a comment'
                         onChange={e => {
-                            setId(post.id);
+                            setId(comment.id);
                             setBody(e.target.value);
                         }}
                         value={body}
@@ -47,4 +46,4 @@ const CommentForm = ({ post }) => {
     );
 };
 
-export default CommentForm;
+export default EditCommentForm;

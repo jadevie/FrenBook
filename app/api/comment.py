@@ -6,6 +6,12 @@ from .session import validation_errors_to_error_messages
 
 bp = Blueprint("comments", __name__, url_prefix="/comments")
 
+@bp.route('/<int:comment_id>')
+@login_required
+def get_comment_by_id(comment_id):
+    comment = Comment.query.get(comment_id)
+    return {'comment': comment.to_dict()}
+
 @bp.route('/<int:comment_id>', methods =['PUT'])
 @login_required
 def update_comment(comment_id):
