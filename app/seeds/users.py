@@ -10,7 +10,8 @@ def seed_users():
         email='demo@aa.io',
         password='password',
         birthday= date(1990,4,4),
-        gender='female'
+        gender='female',
+        profile_picture_url='https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
         )
 
     marnie = User(
@@ -20,7 +21,8 @@ def seed_users():
         email='marnie@aa.io',
         password='password',
         birthday= date(1990,4,4),
-        gender='female'
+        gender='female',
+        profile_picture_url='https://images.pexels.com/photos/4429279/pexels-photo-4429279.jpeg?auto=compress&cs=tinysrgb&w=600'
         )
 
     bobbie = User(
@@ -30,7 +32,8 @@ def seed_users():
         email='bobbie@aa.io',
         password='password',
         birthday= date(1990,4,4),
-        gender='male'
+        gender='male',
+        profile_picture_url='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600'
         )
 
     john = User(
@@ -40,7 +43,8 @@ def seed_users():
         email='john@gmail.com',
         password='password',
         birthday= date(1990,4,4),
-        gender='male'
+        gender='male',
+        profile_picture_url='https://images.pexels.com/photos/2080382/pexels-photo-2080382.jpeg?auto=compress&cs=tinysrgb&w=600'
         )
 
     db.session.add(demo)

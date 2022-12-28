@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { editComment } from '../../../../../store/commentDetails';
-import { getPosts } from '../../../../../store/posts';
+import { clearCommentDetails } from '../../../../../store/commentDetails';
+import { editComment } from '../../../../../store/posts';
 
 
 const EditCommentForm = ({ comment }) => {
@@ -14,12 +14,12 @@ const EditCommentForm = ({ comment }) => {
         e.preventDefault();
         const comment = { body };
         await dispatch(editComment(id, comment))
-            .then(() => document.getElementById('editComment').style.display = 'none');
-        await dispatch(getPosts())
-            .catch(e => {
-                const errors = e.errors;
-                setErrors(errors);
-            });
+            .then(() => dispatch(clearCommentDetails()));
+        document.getElementById('editComment').style.display = 'none';
+        // .catch(e => {
+        //     const errors = e.errors;
+        //     setErrors(errors);
+        // });
     };
 
     return (
@@ -27,9 +27,9 @@ const EditCommentForm = ({ comment }) => {
             <div>
                 <form onSubmit={handleOnSubmit}>
                     <div>
-                        {errors.length > 0 && errors.map((error, ind) => (
+                        {/* {errors.length > 0 && errors.map((error, ind) => (
                             <div key={ind}>{error}</div>
-                        ))}
+                        ))} */}
                     </div>
                     <input
                         type='text'

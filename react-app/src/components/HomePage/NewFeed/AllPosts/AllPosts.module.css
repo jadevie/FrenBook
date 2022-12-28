@@ -1,0 +1,12 @@
+.userImage {
+    max-width: 20px;
+
+}
+
+.showEditComment {
+    display: block
+}
+
+.hideEditComment {
+    display: none
+}

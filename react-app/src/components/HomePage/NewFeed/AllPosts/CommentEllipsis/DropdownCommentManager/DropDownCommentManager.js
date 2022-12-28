@@ -1,15 +1,13 @@
 import styles from './DropDownCommentManager.module.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setDeleteCommentModal } from '../../../../../../store/ui';
-import { editComment, setCommentDetails } from '../../../../../../store/commentDetails';
-import { getPosts } from '../../../../../../store/posts';
+import { setCommentDetails } from '../../../../../../store/commentDetails';
 
 const DropDownCommentManager = ({ comment }) => {
     const dispatch = useDispatch();
 
     const handleEditComment = async comment => {
-        document.getElementById('editComment').style.display = 'block';
         await dispatch(setCommentDetails(comment.id));
     };
 

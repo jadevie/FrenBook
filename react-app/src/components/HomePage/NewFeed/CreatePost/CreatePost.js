@@ -14,7 +14,7 @@ const CreatePost = ({ user }) => {
     return (
         <div className={styles.lineWrapper}>
             <div className={styles.createPostWrapper}>
-                <div className={styles.img}> <img src={`${user.profile_picture_url}`} alt='profile' /></div>
+                <div> <img src={`${user.profile_picture_url}`} alt='profile' className={styles.userImage} /></div>
                 <button onClick={handleOnclick} className={styles.question}>What's on your mind, {user.first_name}?</button>
             </div>
             <div className={styles.line}></div>

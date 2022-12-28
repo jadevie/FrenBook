@@ -26,7 +26,6 @@ const CreatePostForm = () => {
             const id = newPost.id;
             await dispatch(addPostImage(id, image, preview))
                 .then(() => dispatch(setCreatePostModal(false)))
-                .then(() => dispatch(getPosts()))
                 .catch(e => {
                     const errors = e.errors;
                     setErrors(errors);

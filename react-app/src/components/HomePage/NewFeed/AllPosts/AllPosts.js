@@ -1,12 +1,15 @@
-// import styles from './AllPosts.module.css';
+import styles from './AllPosts.module.css';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../../../store/posts';
 import CommentForm from './CommentForm/CommentForm';
 import { Ellipsis } from './Ellipsis/Ellipsis';
 import { CommentEllipsis } from './CommentEllipsis/CommentEllipsis';
+import EditCommentForm from './EditCommentForm/EditCommentForm';
+
 
 const AllPosts = ({ user }) => {
+    const editComment = useSelector(state => state.commentDetails.comment);
     const posts = useSelector(state => state.posts);
     const allposts = posts.allPosts;
     const postArray = Object.values(allposts)
@@ -22,8 +25,8 @@ const AllPosts = ({ user }) => {
             <div key={i}>
                 <div>{post.user.username}</div>
                 <div>{user.id === post.user_id ? <Ellipsis post={post} /> : null}</div>
-                <div>
-                    <img src={`${post.user.profile_picture_url}`} alt='profile' />
+                <div className={styles.userImage}>
+                    <img src={`${post.user.profile_picture_url}`} alt='profile' className={styles.userImage} />
                 </div>
                 <div>{post.created_at}</div>
                 <div>{post.body}</div>
@@ -35,6 +38,9 @@ const AllPosts = ({ user }) => {
                         <div key={i}>
                             {comment.body}
                             {comment.user_id === user.id ? <CommentEllipsis comment={comment} /> : null}
+                            {<div id='editComment' className={editComment && editComment.id === comment.id ? styles.showEditComment : styles.hideEditComment}>
+                                {<EditCommentForm comment={comment} />}
+                            </div>}
                         </div>) : null}
                 </div>
                 <div>

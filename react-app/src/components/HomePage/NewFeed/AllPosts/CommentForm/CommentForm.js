@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../../../../../store/posts';
-import { getPosts } from '../../../../../store/posts';
 
 
 const CommentForm = ({ post }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState('');
     const [id, setId] = useState(0);
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
 
     const handleOnSubmit = async e => {
         e.preventDefault();
         const comment = { body };
         await dispatch(addComment(id, comment))
-            .then(() => setBody(''))
-            .catch(e => {
-                const errors = e.errors;
-                setErrors(errors);
-            });
-        await dispatch(getPosts());
+            .then(() => setBody(''));
+        // .catch(e => {
+        //     setErrors(e.errors);
+        // });
     };
 
     return (
@@ -27,9 +24,9 @@ const CommentForm = ({ post }) => {
             <div>
                 <form onSubmit={handleOnSubmit}>
                     <div>
-                        {errors.length > 0 && errors.map((error, ind) => (
+                        {/* {errors.length > 0 && errors.map((error, ind) => (
                             <div key={ind}>{error}</div>
-                        ))}
+                        ))} */}
                     </div>
                     <input
                         type='text'

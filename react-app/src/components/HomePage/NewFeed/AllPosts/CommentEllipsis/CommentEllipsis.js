@@ -18,9 +18,6 @@ export const CommentEllipsis = ({ comment }) => {
             <button onClick={() => setShowMenu(true)}>
                 <i className="fa-solid fa-ellipsis"></i>
             </button>
-            <div id='editComment' className={styles.editComment}>
-                {<EditCommentForm comment={comment} />}
-            </div>
             {showMenu && <DropDownCommentManager comment={comment} />}
         </div>
     );
