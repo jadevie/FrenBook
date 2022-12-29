@@ -113,12 +113,31 @@ const SignUpForm = () => {
                 </div>
                 <div>
                     <label>Gender</label>
-                    <input
-                        type='text'
-                        name='gender'
-                        onChange={e => setGender(e.target.value)}
-                        value={gender}
-                    ></input>
+                    <label>Female
+                        <input
+                            type='radio'
+                            name='gender'
+                            onChange={e => setGender(e.target.value)}
+                            value={gender} />
+                    </label>
+
+                    <label>Male
+                        <input
+                            type='radio'
+                            name='gender'
+                            onChange={e => setGender(e.target.value)}
+                            value={gender} />
+                    </label>
+                    <label>
+                        <input
+                            placeholder='Custom'
+                            type='text'
+                            name='gender'
+                            onChange={e => setGender(e.target.value)
+                            }
+                            value={gender}>
+                        </input>
+                    </label>
                 </div>
                 <div>
                     <label>Password</label>
