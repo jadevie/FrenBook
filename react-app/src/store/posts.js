@@ -146,7 +146,8 @@ export default function postsReducer(state = initialState, action) {
             return newState;
         case DELETE_COMMENT:
             newState = { ...state };
-            newState.allPosts[action.comment.post_id].comments.forEach((comment, i) => comment.id === action.comment.id ? delete comment.id : null);
+            let array = newState.allPosts[action.comment.post_id].comments;
+            array.forEach((comment, i) => comment.id === action.comment.id ? array.splice(i, 1) : null);
             return newState;
         default:
             return state;

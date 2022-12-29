@@ -8,7 +8,6 @@
     height: 120px;
     background-color: white;
     border-radius: 10px;
-    /* justify-content: space  -around; */
 }
 
 .profilePictureWrapper {
@@ -37,8 +36,6 @@
 .question:hover {
     background-color: #e4e7eb;
 }
-
-
 
 .line {
     border: 1px solid #dddfe2;

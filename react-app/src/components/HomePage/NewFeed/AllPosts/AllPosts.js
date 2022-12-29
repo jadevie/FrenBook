@@ -39,21 +39,26 @@ const AllPosts = ({ user }) => {
 
                     <div className={styles.body}>{post.body}</div>
 
-                    <div className={styles.postImage}>
-                        {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='postImage' src={image.image_url} />) : null}
+                    <div className={styles.postImageWrapper}>
+                        {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='' src={image.image_url} className={styles.image} />) : null}
                     </div>
 
-                    <div className={styles.comments}>
+                    <div>
                         {post.comments.length ? post.comments.map((comment, i) =>
-                            <div key={i}>
+                            <div key={i} className={styles.comments}>
                                 <div className={styles.userImageSmall}>
                                     <img src={`${comment.user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
                                 </div>
-                                {comment.body}
-                                {comment.user_id === user.id ? <CommentEllipsis comment={comment} /> : null}
-                                {<div id='editComment' className={editComment && editComment.id === comment.id ? styles.showEditComment : styles.hideEditComment}>
+                                <div className={styles.commentBody}>
+                                    <div className={styles.username}> {comment.user.username} </div>
+                                    <div className={styles.body}> {comment.body} </div>
+                                </div>
+                                <div className={styles.commentEllipsis}>
+                                    {comment.user_id === user.id ? <CommentEllipsis comment={comment} /> : null}
+                                </div>
+                                <div id='editComment' className={editComment && editComment.id === comment.id ? styles.showEditComment : styles.hideEditComment}>
                                     {<EditCommentForm comment={comment} />}
-                                </div>}
+                                </div>
                             </div>) : null}
                     </div>
 
@@ -64,8 +69,9 @@ const AllPosts = ({ user }) => {
                         <CommentForm post={post} />
                     </div>
                 </div>
-            </div>)}
-        </div>
+            </div>
+        )}
+        </div >
     );
 };
 

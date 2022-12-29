@@ -1,3 +1,4 @@
+import styles from './CommentForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../../../../../store/posts';
@@ -22,13 +23,14 @@ const CommentForm = ({ post }) => {
     return (
         <div>
             <div>
-                <form onSubmit={handleOnSubmit}>
+                <form onSubmit={handleOnSubmit} className={styles.addCommentWrapper}>
                     <div>
                         {/* {errors.length > 0 && errors.map((error, ind) => (
                             <div key={ind}>{error}</div>
                         ))} */}
                     </div>
-                    <input
+                    <textarea
+                        className={styles.commentInput}
                         type='text'
                         placeholder='Write a comment'
                         onChange={e => {
@@ -37,7 +39,7 @@ const CommentForm = ({ post }) => {
                         }}
                         value={body}
                     />
-                    <button type='submit'>Post</button>
+                    <button className={styles.post} type='submit'>Post</button>
                 </form>
             </div>
         </div>

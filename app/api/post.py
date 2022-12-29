@@ -153,8 +153,3 @@ def post_comment(post_id):
         db.session.commit()
         return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
-
-# @bp.route('/<int:post_id>/comments')
-# @login_required
-# def get_comments(post_id):
-#     post = Post.query.get(post_id)

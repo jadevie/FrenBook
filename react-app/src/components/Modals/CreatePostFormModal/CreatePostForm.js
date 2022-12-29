@@ -66,8 +66,9 @@ const CreatePostForm = () => {
                     name='image'
                     onChange={handleImage}
                     accept='image/*'
+                // style={{ display: "none" }}
                 />
-                <img id='postImage' alt='postImage' src={preview && URL.createObjectURL(image)} />
+                <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} />
                 <button type='submit' className={`${styles.postBtn} ${body ? styles.ready : styles.notReady}`}>Post</button>
             </form>
         </div >
