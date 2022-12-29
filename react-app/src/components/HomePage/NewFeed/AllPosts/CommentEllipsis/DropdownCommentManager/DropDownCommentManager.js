@@ -19,17 +19,15 @@ const DropDownCommentManager = ({ comment }) => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.row}>
-                <div>
-                    <button onClick={() => {
-                        handleEditComment(comment);
-                    }} className={styles.word}>Edit
-                    </button>
-                </div>
+            <div>
+                <button onClick={() => {
+                    handleEditComment(comment);
+                }} className={styles.row}>Edit
+                </button>
             </div>
 
-            <div className={`${styles.row} ${styles.delete}`}>
-                <div><button onClick={handleDeleteComment} className={styles.word}>Delete</button></div>
+            <div>
+                <button onClick={handleDeleteComment} className={styles.row}>Delete</button>
             </div>
         </div >
     );

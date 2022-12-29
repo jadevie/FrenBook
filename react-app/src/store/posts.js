@@ -94,7 +94,7 @@ export const deletePost = postId => async dispatch => {
 
 
 export const editComment = (id, comment) => async dispatch => {
-    const response = await fetch(`api/comments/${id}`, {
+    const response = await fetch(`/api/comments/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(comment)

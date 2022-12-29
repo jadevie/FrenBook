@@ -1,5 +1,5 @@
 import styles from './EditCommentForm.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearCommentDetails } from '../../../../../store/commentDetails';
 import { editComment } from '../../../../../store/posts';
@@ -8,7 +8,7 @@ import { editComment } from '../../../../../store/posts';
 const EditCommentForm = ({ comment }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState(comment.body);
-    const [id, setId] = useState(0);
+    const [id, setId] = useState(comment.id);
 
     const handleOnSubmit = async e => {
         e.preventDefault();

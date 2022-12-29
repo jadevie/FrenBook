@@ -24,23 +24,9 @@
     background-color: transparent;
     font-size: 16px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .row:hover {
     background-color: #f7f7f7;
-}
-
-.iconWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    font-size: 24px;
-}
-
-.word {
-    display: flex;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 16px;
 }

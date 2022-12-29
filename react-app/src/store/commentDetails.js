@@ -1,7 +1,7 @@
 const SET_COMMENT_DETAILS = 'commentDetails/SET_COMMENT_DETAILS';
 const CLEAR_COMMENT_DETAILS = 'commentDetailsCLEAR_COMMENT_DETAILS';
 // const EDIT_COMMENT = 'commentDetails/EDIT_COMMENT';
-const DELETE_COMMENT = 'commentDetails/DELETE_COMMENT';
+// const DELETE_COMMENT = 'commentDetails/DELETE_COMMENT';
 
 export const setCommentDetails = id => async dispatch => {
     const response = await fetch(`/api/comments/${id}`);
@@ -32,10 +32,10 @@ export const clearCommentDetails = () => {
 //     }
 // };
 
-export const deleteComment = (comment) => async dispatch => {
-    await fetch(`/api/comments/${comment.id}`, { method: 'DELETE' });
-    dispatch({ type: DELETE_COMMENT, comment });
-};
+// export const deleteComment = (comment) => async dispatch => {
+//     await fetch(`/api/comments/${comment.id}`, { method: 'DELETE' });
+//     dispatch({ type: DELETE_COMMENT, comment });
+// };
 
 
 export default function commentDetailsReducer(state = {}, action) {
@@ -50,9 +50,9 @@ export default function commentDetailsReducer(state = {}, action) {
         // case EDIT_COMMENT:
         //     newState = action.comment;
         //     return newState;
-        case DELETE_COMMENT:
-            delete newState[action.comment.id];
-            return newState;
+        // case DELETE_COMMENT:
+        //     delete newState[action.comment.id];
+        //     return newState;
         default:
             return state;
     }
