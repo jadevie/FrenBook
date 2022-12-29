@@ -19,7 +19,7 @@ export const ProfileButton = () => {
     return (
         <div>
             <button className={styles.profileButton} onClick={() => setShowMenu(true)}>
-                <i className="fas fa-user-circle" />
+                <img src={user.profile_picture_url} alt='userPhoto' className={styles.profilePicture} />
             </button>
             {showMenu && <DropdownMenu user={user} />}
         </div>

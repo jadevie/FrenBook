@@ -4,5 +4,10 @@
     cursor: pointer;
     font-size: 40px;
     color: rgb(110, 110, 110);
-    padding-top: 5px
+}
+
+.profilePicture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }

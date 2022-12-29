@@ -1,8 +1,7 @@
 import styles from './CreatePostForm.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPost, addPostImage } from '../../../store/posts';
-import { getPosts } from '../../../store/posts';
 import { setCreatePostModal } from '../../../store/ui';
 
 const CreatePostForm = () => {
@@ -26,7 +25,6 @@ const CreatePostForm = () => {
             const id = newPost.id;
             await dispatch(addPostImage(id, image, preview))
                 .then(() => dispatch(setCreatePostModal(false)))
-                .then(() => dispatch(getPosts()))
                 .catch(e => {
                     const errors = e.errors;
                     setErrors(errors);
@@ -68,8 +66,9 @@ const CreatePostForm = () => {
                     name='image'
                     onChange={handleImage}
                     accept='image/*'
+                // style={{ display: "none" }}
                 />
-                <img id='postImage' alt='postImage' src={preview && URL.createObjectURL(image)} />
+                <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} />
                 <button type='submit' className={`${styles.postBtn} ${body ? styles.ready : styles.notReady}`}>Post</button>
             </form>
         </div >

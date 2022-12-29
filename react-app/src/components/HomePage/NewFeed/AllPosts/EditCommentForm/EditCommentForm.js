@@ -1,37 +1,31 @@
+import styles from './EditCommentForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { editComment } from '../../../../../store/commentDetails';
-import { getPosts } from '../../../../../store/posts';
+import { clearCommentDetails } from '../../../../../store/commentDetails';
+import { editComment } from '../../../../../store/posts';
 
 
 const EditCommentForm = ({ comment }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState(comment.body);
-    const [id, setId] = useState(0);
-    const [errors, setErrors] = useState([]);
+    const [id, setId] = useState(comment.id);
 
     const handleOnSubmit = async e => {
         e.preventDefault();
         const comment = { body };
         await dispatch(editComment(id, comment))
+            .then(() => dispatch(clearCommentDetails()))
             .then(() => document.getElementById('editComment').style.display = 'none');
-        await dispatch(getPosts())
-            .catch(e => {
-                const errors = e.errors;
-                setErrors(errors);
-            });
     };
 
     return (
         <div>
             <div>
-                <form onSubmit={handleOnSubmit}>
-                    <div>
-                        {errors.length > 0 && errors.map((error, ind) => (
-                            <div key={ind}>{error}</div>
-                        ))}
-                    </div>
-                    <input
+                <form onSubmit={handleOnSubmit} >
+                    <textarea
+                        id='textarea'
+                        className={styles.editInput}
+                        name='edit'
                         type='text'
                         onChange={e => {
                             setId(comment.id);
@@ -39,7 +33,7 @@ const EditCommentForm = ({ comment }) => {
                         }}
                         value={body}
                     />
-                    <button type='submit'>Post</button>
+                    <button type='submit' className={styles.post}>Post</button>
                 </form>
             </div>
         </div>

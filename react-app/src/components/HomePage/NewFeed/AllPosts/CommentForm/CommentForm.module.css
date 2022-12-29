@@ -1,0 +1,27 @@
+.addCommentWrapper {
+    display: flex;
+    width: 440px;
+}
+
+.commentInput {
+    border: none;
+    outline: none;
+    resize: none;
+    word-wrap: break-word;
+    overflow: hidden;
+
+
+    background-color: #F0F2F5;
+    color: #65676B;
+    border-radius: 25px;
+    min-width: 100%;
+    height: 40px;
+    padding: 8px 12px;
+    margin-right: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.post {
+    font-weight: bold;
+}

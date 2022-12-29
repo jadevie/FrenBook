@@ -1,4 +1,4 @@
-// import styles from './Ellipsis.module.css';
+import styles from './Ellipsis.module.css';
 import React, { useEffect, useState } from 'react';
 import DropDownPostManager from './DropDownPostManager/DropDownPostManager';
 
@@ -14,7 +14,7 @@ export const Ellipsis = ({ post }) => {
 
     return (
         <div>
-            <button onClick={() => setShowMenu(true)}>
+            <button onClick={() => setShowMenu(true)} className={styles.ellipsis}>
                 <i className="fa-solid fa-ellipsis"></i>
             </button>
             {showMenu && <DropDownPostManager post={post} />}

@@ -1,3 +1,7 @@
+.lineWrapper {
+    display: flex;
+    flex-direction: column
+}
 
 .createPostWrapper {
     display: flex;
@@ -6,17 +10,25 @@
     border-radius: 10px;
 }
 
+.profilePictureWrapper {
+    margin: 10px
+}
 
-.img {}
+.profilePicture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%
+}
 
 .question {
     background-color: #F0F2F5;
     color: #65676B;
     border-radius: 25px;
-    width: 400px;
+    width: 100%;
     height: 40px;
     padding: 8px 12px;
     margin-top: 10px;
+    margin-right: 10px;
     text-align: left;
     font-size: 17px;
 }
@@ -25,16 +37,31 @@
     background-color: #e4e7eb;
 }
 
-.lineWrapper {
-    display: flex;
-    flex-direction: column;
-}
-
 .line {
     border: 1px solid #dddfe2;
     margin-left: 12px;
     margin-right: 12px;
     margin-top: -60px;
-    margin-bottom: 70px;
     padding: 0px 10px
+}
+
+.uploadPhotoWrapper {
+    display: flex;
+    padding-left: 225px;
+    margin-bottom: 100px;
+    padding-top: 15px;
+}
+
+.uploadPhoto {
+    font-size: 16px;
+    color: #65676B;
+    font-weight: 500;
+    padding-top: 3px;
+}
+
+.photoIcon {
+    color: #00A400;
+    font-size: 24px;
+    padding-right: 5px;
+    cursor: pointer;
 }

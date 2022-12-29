@@ -28,6 +28,8 @@ class User(db.Model, UserMixin):
     posts = relationship(
         "Post", back_populates="user", cascade="all, delete-orphan")
 
+    comments = relationship('Comment', back_populates='user')
+
 
     @property
     def password(self):
@@ -50,7 +52,7 @@ class User(db.Model, UserMixin):
             'birthday': self.birthday,
             'gender': self.gender,
             'profile_picture_url': self.profile_picture_url,
-            'posts' : [post.to_dict() for post in self.posts]
+            'posts' : [post.to_dict() for post in self.posts],
         }
 
     def to_dict_no_posts(self):

@@ -1,15 +1,13 @@
 import styles from './DropDownCommentManager.module.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setDeleteCommentModal } from '../../../../../../store/ui';
-import { editComment, setCommentDetails } from '../../../../../../store/commentDetails';
-import { getPosts } from '../../../../../../store/posts';
+import { setCommentDetails } from '../../../../../../store/commentDetails';
 
 const DropDownCommentManager = ({ comment }) => {
     const dispatch = useDispatch();
 
     const handleEditComment = async comment => {
-        document.getElementById('editComment').style.display = 'block';
         await dispatch(setCommentDetails(comment.id));
     };
 
@@ -21,17 +19,15 @@ const DropDownCommentManager = ({ comment }) => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.row}>
-                <div>
-                    <button onClick={() => {
-                        handleEditComment(comment);
-                    }}>Edit
-                    </button>
-                </div>
+            <div>
+                <button onClick={() => {
+                    handleEditComment(comment);
+                }} className={styles.row}>Edit
+                </button>
             </div>
 
-            <div className={`${styles.row} ${styles.delete}`}>
-                <div><button onClick={handleDeleteComment}>Delete</button></div>
+            <div>
+                <button onClick={handleDeleteComment} className={styles.row}>Delete</button>
             </div>
         </div >
     );

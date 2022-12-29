@@ -15,7 +15,7 @@ const DropdownMenu = ({ user }) => {
         <div className={styles.wrapper}>
             <div className={styles.row}>
                 <div className={`${styles.iconWrapper}`}>
-                    <i className={`fas fa-user-circle ${styles.profilePicture}`} />
+                    <img src={user.profile_picture_url} alt='userPhoto' className={styles.profilePicture} />
                 </div>
                 <div className={styles.name}>{user.username}</div>
             </div>

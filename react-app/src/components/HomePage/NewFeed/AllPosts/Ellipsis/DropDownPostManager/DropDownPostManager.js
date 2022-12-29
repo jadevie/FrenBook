@@ -20,20 +20,25 @@ const DropDownPostManager = ({ post }) => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.row}>
-                <div className={styles.iconWrapper}>
-                    <i className="fa-solid fa-pen"></i>
-                </div>
-                <div><button onClick={() => handleEditPost(post)}>Edit post</button></div>
-            </div>
-            
-            <div className={`${styles.row} ${styles.delete}`}>
-                <div className={styles.iconWrapper}>
-                    <i className="fa-regular fa-trash-can"></i>
-                </div>
-                <div><button onClick={handleDeletePost}>Move to trash</button></div>
-            </div>
-        </div>
+            <button onClick={() => handleEditPost(post)}>
+                <span className={styles.row}>
+                    <div className={styles.iconWrapper}>
+                        <i className="fa-solid fa-pen"></i>
+                    </div>
+                    <div className={styles.name}>Edit post</div>
+                </span>
+            </button>
+
+
+            <button onClick={handleDeletePost}>
+                <span className={styles.row}>
+                    <div className={styles.iconWrapper}>
+                        <i className="fa-regular fa-trash-can"></i>
+                    </div>
+                    <div className={styles.name}>Move to trash</div>
+                </span>
+            </button>
+        </div >
     );
 };
 

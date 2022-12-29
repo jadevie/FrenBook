@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../store/session';
 import { setSignUpModal } from '../../../store/ui';
-import { getPosts } from '../../../store/posts';
 
 
 const LoginForm = () => {
@@ -17,16 +16,13 @@ const LoginForm = () => {
     await dispatch(logIn({ email, password }))
       .catch(e => {
         setErrors(e.errors);
-      })
-      .then(() => {
-        dispatch(getPosts());
       });
   };
 
   return (
     <>
-      <div>
-        <form onSubmit={onLogin} className={styles.wrapper}>
+      <div className={styles.wrapper}>
+        <form onSubmit={onLogin} >
           <div>
             <input className={styles.input}
               type='text'
@@ -46,6 +42,11 @@ const LoginForm = () => {
           <div>
             <button type='submit' className={styles.loginBtn}>Login</button>
           </div>
+          <button type="submit" className={styles.demoUser} onClick={() => {
+            setEmail("demo@aa.io");
+            setPassword("password");
+          }}>Log in as demo user
+          </button>
           <div className={styles.errors}>
             {errors.length > 0 && errors.map((error, ind) => (
               <div key={ind}>{error}</div>

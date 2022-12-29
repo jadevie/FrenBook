@@ -34,6 +34,7 @@
     align-items: center;
     width: 50px;
     font-size: 24px;
+    cursor: pointer;
 }
 
 .name {
@@ -50,5 +51,8 @@
 }
 
 .profilePicture {
-    color: #6e6e6e
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
 }
