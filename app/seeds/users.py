@@ -6,7 +6,7 @@ def seed_users():
     demo = User(
         first_name='Demo',
         last_name='User',
-        username='Demo',
+        username='Demo U',
         email='demo@aa.io',
         password='password',
         birthday= date(1990,4,4),
@@ -17,7 +17,7 @@ def seed_users():
     marnie = User(
         first_name='Marnie',
         last_name='Molly',
-        username='marnie',
+        username='Marnie M',
         email='marnie@aa.io',
         password='password',
         birthday= date(1990,4,4),
@@ -28,7 +28,7 @@ def seed_users():
     bobbie = User(
         first_name='Bobbie',
         last_name='Brown',
-        username='bobbie',
+        username='Bobbie B',
         email='bobbie@aa.io',
         password='password',
         birthday= date(1990,4,4),
@@ -39,7 +39,7 @@ def seed_users():
     john = User(
         first_name='John',
         last_name='Smith',
-        username='JohnS',
+        username='John S',
         email='john@gmail.com',
         password='password',
         birthday= date(1990,4,4),

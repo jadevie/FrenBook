@@ -3,43 +3,35 @@ from app.models import db, Post
 def seed_posts():
     post1 = Post(
         user_id=1,
-        body= 'Today is a great day'
+        body= "The most happiest moment is to gather with my family. It's been a long time since I have not gone back home. "
     )
     post2 = Post(
         user_id=2,
-        body= "I love it when it's snow"
+        body= "I love it when I could have some time reading good books and enjoying a cup of tea. This area is one of my favorite in my house"
     )
     post3 = Post(
         user_id=3,
-        body= "It's raining now"
+        body= "We still go with our Hawaii plan eventhough by the time we’re back it’ll be move day the next day! However, we had so much fun in Maui. Such a nice treat before the big move!"
     )
     post4 = Post(
         user_id=4,
-        body= "Christmas is coming"
+        body= "Jayden and daddy"
     )
     post5 = Post(
         user_id=1,
-        body= 'Today is a another good day'
+        body= "I can’t believe I could wipe each of the leaves as if I have all of the time in the world 😂"
     )
     post6 = Post(
         user_id=2,
-        body= 'Hanging out with my son.'
+        body= 'One of my favorite location to visit!'
     )
     post7 = Post(
         user_id=3,
-        body= 'What are you thinking of life in general?'
+        body= "Since when my baby boy becomes an adventurous person? We’ve never bring him to these type of activities before but I heard from the counselor that he’s so enthusiastic & did it all with no hesitation. I’m so glad he finally gets to do something fun for the summer before school starts 🙂"
     )
     post8 = Post(
         user_id=4,
-        body= 'Nothing else matter.'
-    )
-    post9 = Post(
-        user_id=1,
-        body= 'I have been dreaming.'
-    )
-    post10 = Post(
-        user_id=2,
-        body= "It's ok to not feel ok!"
+        body= 'Here are our last memories of Alameda... I want you all to know we are grateful you come to our life and we had a lot of bonding memories during our journey in CA. You guys are one of the nicest people I’ve ever known in my life. I miss you all already…'
     )
 
     db.session.add(post1)
@@ -50,8 +42,6 @@ def seed_posts():
     db.session.add(post6)
     db.session.add(post7)
     db.session.add(post8)
-    db.session.add(post9)
-    db.session.add(post10)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE the users table.
