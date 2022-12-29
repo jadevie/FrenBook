@@ -39,7 +39,7 @@ const CommentForm = ({ post }) => {
                         }}
                         value={body}
                     />
-                    <button className={styles.post} type='submit'>Post</button>
+                    <button className={styles.post} type='submit' disabled={body ? false : true}>Post</button>
                 </form>
             </div>
         </div>

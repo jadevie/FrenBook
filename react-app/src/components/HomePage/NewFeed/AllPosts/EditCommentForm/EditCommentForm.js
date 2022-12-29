@@ -14,8 +14,7 @@ const EditCommentForm = ({ comment }) => {
         e.preventDefault();
         const comment = { body };
         await dispatch(editComment(id, comment))
-            .then(() => dispatch(clearCommentDetails()))
-            .then(() => document.getElementById('editComment').style.display = 'none');
+            .then(() => dispatch(clearCommentDetails()));
     };
 
     return (

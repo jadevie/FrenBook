@@ -69,7 +69,7 @@ const CreatePostForm = () => {
                 // style={{ display: "none" }}
                 />
                 <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} />
-                <button type='submit' className={`${styles.postBtn} ${body ? styles.ready : styles.notReady}`}>Post</button>
+                <button type='submit' className={styles.post} disabled={body ? false : true}>Post</button>
             </form>
         </div >
     );
