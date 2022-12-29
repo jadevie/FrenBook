@@ -1,7 +1,3 @@
-.ready {
+.post {
     cursor: pointer;
-}
-
-.notReady:hover {
-    cursor: not-allowed
 }

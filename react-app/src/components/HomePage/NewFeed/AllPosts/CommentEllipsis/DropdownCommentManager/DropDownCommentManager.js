@@ -7,7 +7,8 @@ import { setCommentDetails } from '../../../../../../store/commentDetails';
 const DropDownCommentManager = ({ comment }) => {
     const dispatch = useDispatch();
 
-    const handleEditComment = async comment => {
+    const handleEditComment = async e => {
+        e.preventDefault();
         await dispatch(setCommentDetails(comment.id));
     };
 
@@ -20,9 +21,9 @@ const DropDownCommentManager = ({ comment }) => {
     return (
         <div className={styles.wrapper}>
             <div>
-                <button onClick={() => {
-                    handleEditComment(comment);
-                }} className={styles.row}>Edit
+                <button onClick={
+                    handleEditComment
+                } className={styles.row}>Edit
                 </button>
             </div>
 
