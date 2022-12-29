@@ -64,7 +64,7 @@ const AllPosts = ({ user }) => {
 
                     <div className={styles.commentForm}>
                         <div className={styles.userImageSmall}>
-                            <img src={`${post.user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
+                            <img src={`${user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
                         </div>
                         <CommentForm post={post} />
                     </div>
