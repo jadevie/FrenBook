@@ -1,8 +1,7 @@
-// import styles from './EditPostForm.module.css';
+import styles from './EditPostForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePost } from '../../../store/posts';
-import { getPosts } from '../../../store/posts';
+import { addPostImage, deleteImage, updatePost } from '../../../store/posts';
 import { setEditPostModal } from '../../../store/ui';
 
 
@@ -12,39 +11,96 @@ const EditPostForm = () => {
     const post = useSelector(state => state.postDetails.post);
 
     const [body, setBody] = useState(post.body);
+    const [oldImage, setOldImage] = useState(post.images[0]?.image_url);
+    const [image, setImage] = useState('');
+    const [preview, setPreview] = useState(null);
     const [errors, setErrors] = useState([]);
 
 
     const onSubmit = async e => {
         e.preventDefault();
         const updatedPost = { body };
-        await dispatch(updatePost(post.id, updatedPost))
+        await dispatch(updatePost(post.id, updatedPost));
+        await dispatch(addPostImage(post.id, image, preview))
             .then(() => dispatch(setEditPostModal(false)))
-            .then(() => dispatch(getPosts()))
             .catch(e => {
                 const errors = e.errors;
                 setErrors(errors);
             });
     };
 
+    const handleImage = e => {
+        // Show thumbnail preview before submit post
+        e.preventDefault();
+        setImage(e.target.files[0]);
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            e.preventDefault();
+            setPreview(e.target.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
+
+
+    const handleChangeImage = e => {
+        e.preventDefault();
+        setPreview(null);
+    };
+
+    const handleDeleteImage = async e => {
+        e.preventDefault();
+        if (post.images.length > 0)
+            await dispatch(deleteImage(post.id, post.images[0].id));
+        document.getElementById('del').style.display = 'none';
+        setOldImage('');
+    };
+
     return (
         <div>
-            <div>Edit Post</div>
-            <div>{user.profile_picture_url}</div>
-            <div>{user.username}</div>
-            <form onSubmit={onSubmit}>
-                <div>
-                    {errors.length > 0 && errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))}
+            <div className={styles.wrapper}>
+                <div className={styles.header}>Edit Post</div>
+                <div className={styles.userInfo}>
+                    <img src={user.profile_picture_url} alt='' className={styles.userPhoto} />
+                    <div>{user.username}</div>
                 </div>
-                <input
-                    type='text'
-                    onChange={e => setBody(e.target.value)}
-                    value={body}
-                />
-                <button type='submit'>Post</button>
-            </form>
+
+                <div>
+                    <form onSubmit={onSubmit} className={styles.form}>
+                        <div>
+                            {errors.length > 0 && errors.map((error, ind) => (
+                                <div key={ind}>{error}</div>
+                            ))}
+                        </div>
+                        <textarea
+                            type='text'
+                            onChange={e => setBody(e.target.value)}
+                            value={body}
+                            className={styles.body}
+                            required='true'
+                        />
+                        {oldImage ? <img src={oldImage} alt='' className={styles.preview} id='del' /> :
+                            <label>
+                                <div className={styles.photoIcon}>
+                                    <i className="fa-regular fa-images"></i>
+                                </div>
+                                <div className={styles.addPhoto}>Add Photo</div>
+                                <input
+                                    type='file'
+                                    name='image'
+                                    onChange={handleImage}
+                                    accept='.png, .jpg, .jpeg'
+                                    className={styles.file}
+                                />
+                            </label>}
+
+                        <div><button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>x</button></div>
+
+                        <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
+
+                        <button type='submit' className={`${styles.post} ${body ? styles.ready : styles.notReadyPost}`} disabled={body ? false : true}>Post</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };
