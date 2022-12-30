@@ -1,4 +1,4 @@
-// import styles from './SignUpForm.module.css';
+import styles from './SignUpForm.module.css';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -44,122 +44,148 @@ const SignUpForm = () => {
 
     return (
         <>
-            <form onSubmit={onSignUp}>
-                <div>
-                    {errors.length > 0 && errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))}
-                </div>
-                <div>
-                    <label>Username </label>
-                    <input
-                        type='text'
-                        name='username'
-                        onChange={e => setUsername(e.target.value)}
-                        value={username}
-                    ></input>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type='text'
-                        name='email'
-                        onChange={e => setEmail(e.target.value)}
-                        value={email}
-                    ></input>
-                </div>
-                <div>
-                    <label>First Name</label>
-                    <input
-                        type='text'
-                        name='firstName'
-                        onChange={e => setFirstName(e.target.value)}
-                        value={firstName}
-                    ></input>
-                </div>
-                <div>
-                    <label>Last Name</label>
-                    <input
-                        type='text'
-                        name='lastName'
-                        onChange={e => setLastName(e.target.value)}
-                        value={lastName}
-                    ></input>
-                </div>
-                <div>
-                    <label>Birthday</label>
-                    <select name='month' onChange={e => setMonth(e.target.value)} value={month}>
-                        {months.map((month, i) =>
-                            <option
-                                key={i}
-                                value={Object.keys(month)[0]}>{Object.values(month)[0]}
-                            </option>
-                        )}
-                    </select>
-                    <select name='day' onChange={e => setDay(e.target.value)} value={day}>
-                        {days.map((day, i) =>
-                            <option
-                                key={i}
-                                value={day}>{day}</option>
-                        )}
-                    </select>
-                    <select name='year' onChange={e => setYear(e.target.value)} value={year}>
-                        {years.map((year, i) =>
-                            <option
-                                key={i}
-                                value={year}>{year}</option>
-                        )}
-                    </select>
-                </div>
-                <div>
-                    <label>Gender</label>
-                    <label>Female
+            <div className={styles.wrapper}>
+                <h3>Sign Up</h3>
+                <p>It's quick and easy.</p>
+                <form onSubmit={onSignUp} className={styles.form}>
+                    <div>
+                        {errors.length > 0 && errors.map((error, ind) => (
+                            <div key={ind}>{error}</div>
+                        ))}
+                    </div>
+                    <div className={styles.splitInput}>
+                        <div>
+                            <input
+                                type='text'
+                                placeholder='First Name'
+                                name='firstName'
+                                onChange={e => setFirstName(e.target.value)}
+                                value={firstName}
+                                required={true}
+                                className={styles.input}
+                            ></input>
+                        </div>
+                        <div>
+                            <input
+                                type='text'
+                                placeholder='Last Name'
+                                name='lastName'
+                                onChange={e => setLastName(e.target.value)}
+                                value={lastName}
+                                required={true}
+                                className={styles.input}
+                            ></input>
+                        </div>
+                    </div>
+                    <div>
                         <input
-                            type='radio'
-                            name='gender'
-                            onChange={e => setGender(e.target.value)}
-                            value={gender} />
-                    </label>
-
-                    <label>Male
-                        <input
-                            type='radio'
-                            name='gender'
-                            onChange={e => setGender(e.target.value)}
-                            value={gender} />
-                    </label>
-                    <label>
-                        <input
-                            placeholder='Custom'
                             type='text'
-                            name='gender'
-                            onChange={e => setGender(e.target.value)
-                            }
-                            value={gender}>
-                        </input>
-                    </label>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type='password'
-                        name='password'
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
-                    ></input>
-                </div>
-                <div>
-                    <label>Repeat Password</label>
-                    <input
-                        type='password'
-                        name='repeat_password'
-                        onChange={e => setRepeatPassword(e.target.value)}
-                        value={repeatPassword}
-                        required={true}
-                    ></input>
-                </div>
-                <button type='submit'>Sign Up</button>
-            </form >
+                            name='username'
+                            placeholder='Username'
+                            onChange={e => setUsername(e.target.value)}
+                            value={username}
+                            required={true}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type='text'
+                            name='email'
+                            placeholder='Email'
+                            onChange={e => setEmail(e.target.value)}
+                            value={email}
+                            required={true}
+                            className={styles.input}
+                        ></input>
+                    </div>
+
+                    <div className={styles.birthday}>
+                        <label style={{ fontSize: '12px' }}>Birthday</label>
+                        <div className={styles.daySelection}>
+                            <select name='month' onChange={e => setMonth(e.target.value)} value={month} className={styles.input}>
+                                {months.map((month, i) =>
+                                    <option
+                                        key={i}
+                                        value={Object.keys(month)[0]}>{Object.values(month)[0]}
+                                    </option>
+                                )}
+                            </select>
+                            <select name='day' onChange={e => setDay(e.target.value)} value={day} className={styles.input}>
+                                {days.map((day, i) =>
+                                    <option
+                                        key={i}
+                                        value={day}>{day}</option>
+                                )}
+                            </select>
+                            <select name='year' onChange={e => setYear(e.target.value)} value={year} className={styles.input}>
+                                {years.map((year, i) =>
+                                    <option
+                                        key={i}
+                                        value={year}>{year}</option>
+                                )}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className={styles.gender}>
+                        <label style={{ fontSize: '12px' }}>Gender</label>
+                        <div className={styles.genderSelection}>
+                            <label className={styles.input}>
+                                Female
+                                <input
+                                    type='radio'
+                                    name='gender'
+                                    onChange={e => setGender(e.target.value)}
+                                    value={gender}
+                                    className={styles.radio}
+                                />
+                            </label>
+                            <label className={styles.input}>
+                                Male
+                                <input
+                                    type='radio'
+                                    name='gender'
+                                    onChange={e => setGender(e.target.value)}
+                                    value={gender}
+                                    className={styles.radioM}
+                                />
+                            </label>
+                            <input
+                                placeholder='Custom'
+                                type='text'
+                                name='gender'
+                                onChange={e => setGender(e.target.value)
+                                }
+                                value={gender}
+                                className={styles.input}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input
+                            placeholder='New Password'
+                            type='password'
+                            name='password'
+                            onChange={e => setPassword(e.target.value)}
+                            value={password}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type='password'
+                            placeholder='Repeat Password'
+                            name='repeat_password'
+                            onChange={e => setRepeatPassword(e.target.value)}
+                            value={repeatPassword}
+                            required={true}
+                            className={styles.input}
+                        />
+                    </div>
+                    <button type='submit' className={styles.signupBtn}>Sign Up</button>
+                </form >
+            </div>
         </>
     );
 };
