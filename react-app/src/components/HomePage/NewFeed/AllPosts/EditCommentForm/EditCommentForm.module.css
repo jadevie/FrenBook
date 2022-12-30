@@ -25,3 +25,8 @@
     background-color: #F0F2F5;
     border-radius: 50%;
 }
+
+.notReady {
+    cursor: not-allowed;
+    color: #e4e7eb
+}

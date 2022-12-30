@@ -36,7 +36,6 @@
     border: none;
     outline: none;
     resize: none;
-    resize: vertical;
     word-wrap: break-word;
     min-width: 100%;
     height: 50px;
@@ -44,6 +43,7 @@
 }
 
 .file {
+    border: 1px solid #dadde1;
     width: 100%;
     height: 300px;
     border-radius: 10px;
@@ -55,6 +55,26 @@
 .file:hover {
     background-color: #dadde1;
 }
+
+.addPhoto {
+    position: absolute;
+    top: 370px;
+    right: 200px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.photoIcon {
+    position: absolute;
+    top: 320px;
+    right: 225px;
+    font-size: 20px;
+    background-color: #d6d6d7;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+}
+
 
 .preview {
     position: absolute;
@@ -83,4 +103,25 @@
 
 .post:hover {
     opacity: 1.2;
+}
+
+.notReadyPost {
+    cursor: not-allowed;
+    background-color: #dadde1;
+}
+
+.changeImage {
+    position: absolute;
+    font-size: 20px;
+    background-color: #FFF;
+    border-radius: 50%;
+    padding: 2px 8px;
+    top: 220px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 5
+}
+
+.changeImage:hover {
+    background-color: #dadde1;
 }
