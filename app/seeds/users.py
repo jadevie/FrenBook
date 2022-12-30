@@ -11,7 +11,7 @@ def seed_users():
         password='password',
         birthday= date(1990,4,4),
         gender='female',
-        profile_picture_url='https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+        profile_picture_url='https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg'
         )
 
     marnie = User(
@@ -22,7 +22,7 @@ def seed_users():
         password='password',
         birthday= date(1990,4,4),
         gender='female',
-        profile_picture_url='https://images.pexels.com/photos/4429279/pexels-photo-4429279.jpeg?auto=compress&cs=tinysrgb&w=600'
+        profile_picture_url='https://images.pexels.com/photos/4429279/pexels-photo-4429279.jpeg'
         )
 
     bobbie = User(
@@ -33,7 +33,7 @@ def seed_users():
         password='password',
         birthday= date(1990,4,4),
         gender='male',
-        profile_picture_url='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600'
+        profile_picture_url='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg'
         )
 
     john = User(
@@ -44,7 +44,7 @@ def seed_users():
         password='password',
         birthday= date(1990,4,4),
         gender='male',
-        profile_picture_url='https://images.pexels.com/photos/2080382/pexels-photo-2080382.jpeg?auto=compress&cs=tinysrgb&w=600'
+        profile_picture_url='https://images.pexels.com/photos/2080382/pexels-photo-2080382.jpeg'
         )
 
     db.session.add(demo)

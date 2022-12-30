@@ -18,7 +18,7 @@ export const ProfileButton = () => {
 
     return (
         <div>
-            <button className={styles.profileButton} onClick={() => setShowMenu(true)}>
+            <button onClick={() => setShowMenu(true)}>
                 <img src={user.profile_picture_url} alt='userPhoto' className={styles.profilePicture} />
             </button>
             {showMenu && <DropdownMenu user={user} />}

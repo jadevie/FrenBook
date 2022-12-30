@@ -71,6 +71,7 @@ def sign_up():
             password=form.data['password'],
             birthday=form.data['birthday'],
             gender=form.data['gender'],
+            profile_picture_url= 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
             )
         db.session.add(user)
         db.session.commit()

@@ -40,9 +40,8 @@ const AllPosts = ({ user }) => {
                     <div className={styles.body}>{post.body}</div>
 
                     <div className={styles.postImageWrapper}>
-                        {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='' src={image.image_url} className={styles.image} />) : null}
+                        {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='' src={image.image_url} className={styles.image} onError={e => e.target.style.display = 'none'} />) : null}
                     </div>
-
                     <div>
                         {post.comments.length ? post.comments.map((comment, i) =>
                             <div key={i} className={styles.comments}>

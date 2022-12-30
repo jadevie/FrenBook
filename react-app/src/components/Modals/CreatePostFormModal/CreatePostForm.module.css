@@ -1,3 +1,127 @@
+.wrapper {
+    width: 500px;
+    height: 600px;
+    padding: 20px 0px
+}
+
+.header {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dadde1;
+}
+
+.userInfo {
+    display: flex;
+    gap: 10px;
+    font-weight: 600;
+    padding: 20px 10px
+}
+
+.userPhoto {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    gap: 10px
+}
+
+.body {
+    border: none;
+    outline: none;
+    resize: none;
+    word-wrap: break-word;
+    min-width: 100%;
+    height: 50px;
+    font-size: 16px;
+}
+
+.file {
+    border: 1px solid #dadde1;
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    background-color: #F5F6F7;
+    cursor: pointer;
+    text-indent: -100%;
+}
+
+.file:hover {
+    background-color: #dadde1;
+}
+
+.addPhoto {
+    position: absolute;
+    top: 370px;
+    right: 200px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.photoIcon {
+    position: absolute;
+    top: 320px;
+    right: 225px;
+    font-size: 20px;
+    background-color: #d6d6d7;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+
+.preview {
+    position: absolute;
+    width: 480px;
+    height: 300px;
+    border-radius: 10px;
+    margin-top: 70px;
+    object-fit: cover;
+}
+
+.notReady {
+    display: none;
+}
+
 .post {
     cursor: pointer;
+    width: 100%;
+    background-color: #1B74E4;
+    padding: 10px 40px;
+    color: #FFF;
+    opacity: 0.9;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px
+}
+
+.post:hover {
+    opacity: 1.2;
+}
+
+.notReadyPost {
+    cursor: not-allowed;
+    background-color: #dadde1;
+}
+
+.changeImage {
+    position: absolute;
+    font-size: 20px;
+    background-color: #FFF;
+    border-radius: 50%;
+    padding: 2px 8px;
+    top: 220px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 5
+}
+
+.changeImage:hover {
+    background-color: #dadde1;
 }

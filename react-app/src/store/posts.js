@@ -6,6 +6,7 @@ const ADD_COMMENT = 'posts/ADD_COMMENT';
 const DELETE_POST = 'posts/DELETE_POST';
 const EDIT_COMMENT = 'posts/EDIT_COMMENT';
 const DELETE_COMMENT = 'posts/DELETE_COMMENT';
+const DELETE_IMAGE = 'posts/DELETE_IMAGE';
 
 export const getPosts = () => async dispatch => {
     const response = await fetch(`/api/posts`);
@@ -115,6 +116,12 @@ export const deleteComment = (comment) => async dispatch => {
     dispatch({ type: DELETE_COMMENT, comment });
 };
 
+export const deleteImage = (postId, imageId) => async dispatch => {
+    await fetch(`/api/posts/${postId}/images/${imageId}`, { method: 'DELETE' });
+    dispatch({ type: DELETE_IMAGE, postId, imageId });
+};
+
+
 const initialState = { allPosts: {}, post: {} };
 export default function postsReducer(state = initialState, action) {
     let newState;
@@ -130,6 +137,11 @@ export default function postsReducer(state = initialState, action) {
         case ADD_IMAGE:
             newState = { ...state };
             newState.allPosts[action.postImage.post_id].images.push(action.postImage);
+            return newState;
+        case DELETE_IMAGE:
+            newState = { ...state };
+            const imageArray = newState.allPosts[action.postId].images;
+            imageArray.forEach((image, i) => image.id === action.imageId ? imageArray.splice(i, 1) : null);
             return newState;
         case DELETE_POST:
             newState = { ...state };

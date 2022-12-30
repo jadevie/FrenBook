@@ -1,3 +1,4 @@
+import styles from './DeleteCommentForm.module.css';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../store/posts';
@@ -14,13 +15,14 @@ const DeleteCommentForm = () => {
     };
 
     return (
-        <div>
-            <h3>Are you sure you want to delete this comment?</h3>
-            <form onSubmit={handleSubmit}>
-                <div><button onClick={() => dispatch(setDeleteCommentModal(false))}>Cancel</button></div>
-                <button type='submit'>Delete</button>
-            </form>
-        </div>
+        <div className={styles.wrapper}>
+            <h4 className={styles.header}>Delete Comment?</h4>
+            <p>Are you sure you want to delete this comment?</p>
+            <div className={styles.decision}>
+                <button onClick={() => dispatch(setDeleteCommentModal(false))} className={styles.no}>No</button>
+                <button onClick={handleSubmit} className={styles.del}>Delete</button>
+            </div>
+        </div >
     );
 };
 

@@ -12,6 +12,7 @@ const CreatePostForm = () => {
     const [preview, setPreview] = useState(null);
     const [errors, setErrors] = useState([]);
 
+
     const onSubmit = async e => {
         e.preventDefault();
         const post = { body };
@@ -44,35 +45,54 @@ const CreatePostForm = () => {
         reader.readAsDataURL(e.target.files[0]);
     };
 
+    const handleChangeImage = e => {
+        e.preventDefault();
+        setPreview(null);
+    };
+
     return (
-        <div>
-            <div>Create Post</div>
-            <div>{user.profile_picture_url}</div>
-            <div>{user.username}</div>
-            <form onSubmit={onSubmit}>
+        <div className={styles.wrapper}>
+            <div className={styles.header}>Create Post</div>
+            <div className={styles.userInfo}>
+                <img src={user.profile_picture_url} alt='' className={styles.userPhoto} />
+                <div>{user.username}</div>
+            </div>
+            <form onSubmit={onSubmit} className={styles.form}>
                 <div>
                     {errors.length > 0 && errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <input
+                <textarea
                     type='text'
-                    placeholder={`What's on your mind, ${user.first_name}`}
+                    placeholder={`What's on your mind, ${user.first_name}?`}
                     onChange={e => setBody(e.target.value)}
                     value={body}
+                    className={styles.body}
+                    required='true'
                 />
-                <input
-                    type='file'
-                    name='image'
-                    onChange={handleImage}
-                    accept='image/*'
-                // style={{ display: "none" }}
-                />
-                <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} />
-                <button type='submit' className={styles.post} disabled={body ? false : true}>Post</button>
+                <label>
+                    <div className={styles.photoIcon}>
+                        <i className="fa-regular fa-images"></i>
+                    </div>
+                    <div className={styles.addPhoto}>Add Photo</div>
+                    <input
+                        type='file'
+                        name='image'
+                        onChange={handleImage}
+                        accept='.png, .jpg, .jpeg'
+                        className={styles.file}
+                    />
+                </label>
+
+                <div><button onClick={handleChangeImage} className={styles.changeImage}>x</button></div>
+
+                <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
+
+                <button type='submit' className={`${styles.post} ${body ? styles.ready : styles.notReadyPost}`} disabled={body ? false : true}>Post</button>
             </form>
         </div >
     );
 };
 
-export default CreatePostForm;
+export default CreatePostForm;;

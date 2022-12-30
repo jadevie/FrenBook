@@ -26,6 +26,10 @@
     padding: 3px 5px;
 }
 
+.notReady {
+    cursor: not-allowed;
+}
+
 .post:hover {
     background-color: #e4e7eb;
     border-radius: 50%;

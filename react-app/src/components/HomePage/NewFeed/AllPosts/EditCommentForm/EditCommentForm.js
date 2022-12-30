@@ -32,7 +32,7 @@ const EditCommentForm = ({ comment }) => {
                         }}
                         value={body}
                     />
-                    <button type='submit' className={styles.post}>Post</button>
+                    <button type='submit' className={`${styles.post} ${body ? styles.ready : styles.notReady}`} >Post</button>
                 </form>
             </div>
         </div>

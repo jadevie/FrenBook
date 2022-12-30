@@ -1,0 +1,45 @@
+.wrapper {
+    width: 548px;
+    height: 178px;
+    padding: 10px;
+}
+
+.header {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px
+}
+
+.decision {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    padding-top: 20px;
+    font-size: 18px
+}
+
+.no {
+    color: #1877F2;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 6px;
+    padding: 0 10px;
+}
+
+.no:hover {
+    background-color: #f7f7f7;
+}
+
+.del {
+    background-color: #1B74E4;
+    padding: 10px 40px;
+    color: #FFF;
+    opacity: 0.95;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px
+}
+
+.del:hover {
+    opacity: 1.2;
+}
