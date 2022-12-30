@@ -78,7 +78,7 @@ const EditPostForm = () => {
                             className={styles.body}
                             required='true'
                         />
-                        {oldImage ? <img src={oldImage} alt='' className={styles.preview} id='del' /> :
+                        {oldImage ? <img src={oldImage} alt='' className={styles.preview} id='del' onError={e => e.target.style.display = 'none'} /> :
                             <label>
                                 <div className={styles.photoIcon}>
                                     <i className="fa-regular fa-images"></i>
@@ -93,11 +93,13 @@ const EditPostForm = () => {
                                 />
                             </label>}
 
-                        <div><button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>x</button></div>
+                        <div>
+                            <button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>x</button>
+                        </div>
 
                         <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
 
-                        <button type='submit' className={`${styles.post} ${body ? styles.ready : styles.notReadyPost}`} disabled={body ? false : true}>Post</button>
+                        <button type='submit' className={`${body ? styles.ready : styles.notReadyPost} ${oldImage ? styles.newPost : styles.post}`} disabled={body ? false : true}>Post</button>
                     </form>
                 </div>
             </div>

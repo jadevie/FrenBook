@@ -106,6 +106,19 @@
     opacity: 1.2;
 }
 
+.newPost {
+    cursor: pointer;
+    width: 100%;
+    background-color: #1B74E4;
+    padding: 10px 40px;
+    color: #FFF;
+    opacity: 0.9;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 310px;
+}
+
 .notReadyPost {
     cursor: not-allowed;
     background-color: #dadde1;
