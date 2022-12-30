@@ -130,6 +130,34 @@ def add_image(post_id):
             return post_image.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+@bp.route('/<int:post_id>/images/<int:image_id>', methods=['DELETE'])
+@login_required
+def del_image(post_id, image_id):
+    if not current_user.is_authenticated:
+        return {"errors": { "message": "You have to own this post to delete image"}}
+
+    post = Post.query.get(post_id)
+    if not post:
+        return {"message": "Post couldn't be found"}
+
+    if post.user_id != current_user.id:
+        error = {
+            'message': 'You are not authorized to delete this photo'
+        }
+        return error, 403
+
+    image = PostImage.query.get(image_id)
+    if not image:
+        return {"message": "Image couldn't be found"}
+
+    db.session.delete(image)
+    db.session.commit()
+    return {
+            "message": "Successfully deleted",
+            "statusCode": 200
+        }
+
+
 @bp.route('/<int:post_id>/comments', methods =['POST'])
 @login_required
 def post_comment(post_id):
