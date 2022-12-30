@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setCreatePostModal } from '../../../../store/ui';
 
 const CreatePost = ({ user }) => {
+    console.log(user);
     const dispatch = useDispatch();
 
     const handleOnClick = async e => {

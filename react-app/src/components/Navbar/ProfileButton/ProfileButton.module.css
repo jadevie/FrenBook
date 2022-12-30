@@ -1,13 +1,6 @@
-.profileButton {
-    display: flex;
-    border: none;
-    cursor: pointer;
-    font-size: 40px;
-    color: rgb(110, 110, 110);
-}
-
 .profilePicture {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    cursor: pointer;
 }

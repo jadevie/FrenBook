@@ -22,8 +22,6 @@ const DeleteCommentForm = () => {
                 <button onClick={() => dispatch(setDeleteCommentModal(false))} className={styles.no}>No</button>
                 <button onClick={handleSubmit} className={styles.del}>Delete</button>
             </div>
-
-
         </div >
     );
 };
