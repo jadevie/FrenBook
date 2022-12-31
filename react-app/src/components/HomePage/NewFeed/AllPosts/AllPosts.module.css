@@ -115,3 +115,56 @@
     display: flex;
     gap: 10px
 }
+
+.actionWrapper {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #dddfe2;
+    border-bottom: 1px solid #dddfe2;
+}
+
+.actionBtnWrapper {
+    padding: 7px;
+}
+
+.actionBtn {
+    display: flex;
+    gap: 10px;
+    color: #65676B;
+    font-size: 16px;
+    font-weight: 550;
+    padding: 5px 80px;
+}
+
+.actionBtn:hover {
+    background-color: #dadde1;
+}
+
+.postLikeCommentWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.postLikeInfo {
+    display: flex;
+    gap: 5px
+}
+
+.likeClicked {
+    display: flex;
+    gap: 10px;
+    color: #1877F2;
+    font-size: 16px;
+    font-weight: 550;
+    padding: 5px 80px;
+}
+
+.like {
+    color: #1877F2;
+}
+
+.count {
+    color: #65676B;
+    font-size: 16px;
+}
+
