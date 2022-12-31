@@ -23,8 +23,8 @@ const AllPosts = ({ user }) => {
         dispatch(getPosts());
     }, [dispatch]);
 
-    const handleLike = e => {
-        e.preventDefault();
+    const handleLike = id => {
+        // e.preventDefault();
         if (!clicked) setLikeCount(count + 1);
         if (clicked) setLikeCount(likeCount - 1);
         document.getElementById('like').className = styles.likeClicked;
@@ -66,7 +66,7 @@ const AllPosts = ({ user }) => {
                     </div>
 
                     <div className={styles.actionWrapper}>
-                        <button className={styles.actionBtnWrapper} onClick={handleLike}>
+                        <button className={styles.actionBtnWrapper} onClick={() => handleLike(post.id)}>
                             <span className={!clicked ? styles.actionBtn : styles.likeClicked} id='like'>
                                 <div><i className="fa-regular fa-thumbs-up"></i></div>
                                 <div>Like</div>

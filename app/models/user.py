@@ -5,7 +5,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.types import Integer, DateTime, VARCHAR, TEXT
 from sqlalchemy.schema import Column
 from sqlalchemy.orm import relationship
-
+# from .post import likes
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -29,6 +29,13 @@ class User(db.Model, UserMixin):
         "Post", back_populates="user", cascade="all, delete-orphan")
 
     comments = relationship('Comment', back_populates='user')
+
+    # user_likes = db.relationship(
+    #     "Post",
+    #     secondary=likes,
+    #     back_populates='post_likes',
+    #     cascade="all, delete"
+    # )
 
 
     @property

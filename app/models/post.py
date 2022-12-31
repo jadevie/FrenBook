@@ -5,6 +5,13 @@ from sqlalchemy.types import Integer, DateTime, TEXT
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.orm import relationship
 
+# likes = db.Table(
+#     'likes',
+#     db.Model.metadata,
+#     db.Column('users', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+#     db.Column('posts', db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+# )
+
 class Post(db.Model, UserMixin):
     __tablename__ = 'posts'
 
@@ -20,6 +27,12 @@ class Post(db.Model, UserMixin):
     user = relationship("User", foreign_keys=[user_id], back_populates="posts")
     images = relationship('PostImage',cascade="all, delete-orphan", back_populates='post')
     comments = relationship('Comment',cascade ='all, delete-orphan', back_populates='post')
+    # post_likes = db.relationship(
+    #     "User",
+    #     secondary=likes,
+    #     back_populates='user_likes',
+    #     cascade="all, delete"
+    # )
 
     def to_dict(self):
         return {
@@ -30,5 +43,6 @@ class Post(db.Model, UserMixin):
             'updated_at': self.updated_at,
             'user' : self.user.to_dict_no_posts(),
             'images': [image.to_dict() for image in self.images],
-            'comments': [comment.to_dict() for comment in self.comments]
+            'comments': [comment.to_dict() for comment in self.comments],
+            # 'likes': len(self.post_likes)
         }

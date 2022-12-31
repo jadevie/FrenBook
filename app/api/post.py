@@ -7,7 +7,7 @@ from .session import validation_errors_to_error_messages
 bp = Blueprint("posts", __name__, url_prefix="/posts")
 
 @bp.route("")
-@login_required
+# @login_required
 def get_posts():
     '''
     Get all posts from the most recent post
@@ -181,3 +181,22 @@ def post_comment(post_id):
         db.session.commit()
         return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+# @bp.route('/<int:post_id>/likes', methods =['POST'])
+# @login_required
+# def post_like(post_id):
+#     if not current_user.is_authenticated:
+#         return {"errors": { "message": "You have to leave a comment to this post"}}
+
+#     post = Post.query.get(post_id)
+#     if not post:
+#         return {"message": "Post couldn't be found"}
+
+#     like = Like (
+#         user_id = current_user.id,
+#         post_id = post.id,
+#         count = 1
+#     )
+#     db.session.add(like)
+#     db.session.commit()
+#     return like.to_dict()
