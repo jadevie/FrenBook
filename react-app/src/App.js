@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Modals from "./components/Modals/Modals";
 import { useSelector } from "react-redux";
