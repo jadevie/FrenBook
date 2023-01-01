@@ -7,6 +7,7 @@ const DELETE_POST = 'posts/DELETE_POST';
 const EDIT_COMMENT = 'posts/EDIT_COMMENT';
 const DELETE_COMMENT = 'posts/DELETE_COMMENT';
 const DELETE_IMAGE = 'posts/DELETE_IMAGE';
+const ADD_LIKE = 'posts/ADD_LIKE';
 
 export const getPosts = () => async dispatch => {
     const response = await fetch(`/api/posts`);
@@ -121,6 +122,21 @@ export const deleteImage = (postId, imageId) => async dispatch => {
     dispatch({ type: DELETE_IMAGE, postId, imageId });
 };
 
+export const addLike = (postId) => async dispatch => {
+    const response = await fetch(`api/posts/${postId}/likes`, {
+        method: 'POST',
+        body: JSON.stringify(postId)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: ADD_LIKE, post_id: postId });
+        return data;
+    }
+    if (response.status >= 400) {
+        const errors = await response.json();
+        throw errors;
+    }
+};
 
 const initialState = { allPosts: {}, post: {} };
 export default function postsReducer(state = initialState, action) {

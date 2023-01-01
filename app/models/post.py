@@ -44,5 +44,5 @@ class Post(db.Model, UserMixin):
             'user' : self.user.to_dict_no_posts(),
             'images': [image.to_dict() for image in self.images],
             'comments': [comment.to_dict() for comment in self.comments],
-            'likes': len(self.post_likes)
+            'likes': self.post_likes
         }

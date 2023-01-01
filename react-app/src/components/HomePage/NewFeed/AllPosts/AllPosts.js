@@ -58,7 +58,7 @@ const AllPosts = ({ user }) => {
                         <div className={styles.postLikeInfo}>
                             <div className={styles.like}><i className="fa-regular fa-thumbs-up"></i>
                             </div>
-                            <div className={styles.count}>{likeCount}</div>
+                            <div className={styles.count}>{post.likes.length}</div>
                         </div>
                         <div className={styles.postCommentInfo}>
                             <div className={styles.count}>{`${post.comments.length} comments`}</div>
