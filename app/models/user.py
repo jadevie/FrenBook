@@ -5,7 +5,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.types import Integer, DateTime, VARCHAR, TEXT
 from sqlalchemy.schema import Column
 from sqlalchemy.orm import relationship
-from .post import *
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -30,12 +30,7 @@ class User(db.Model, UserMixin):
 
     comments = relationship('Comment', back_populates='user')
 
-    user_likes = relationship(
-        "Post",
-        secondary=likes,
-        back_populates='post_likes',
-        cascade="all, delete"
-    )
+    likes = relationship("Like", backref='users', cascade="all, delete")
 
 
     @property
@@ -59,6 +54,7 @@ class User(db.Model, UserMixin):
             'birthday': self.birthday,
             'gender': self.gender,
             'profile_picture_url': self.profile_picture_url,
+            'likes': [like.to_dict() for like in self.likes]
         }
 
     def to_dict_no_posts(self):

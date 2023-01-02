@@ -76,7 +76,7 @@ const EditPostForm = () => {
                             onChange={e => setBody(e.target.value)}
                             value={body}
                             className={styles.body}
-                            required='true'
+                            required={true}
                         />
                         {oldImage ? <img src={oldImage} alt='' className={styles.preview} id='del' onError={e => e.target.style.display = 'none'} /> :
                             <label>

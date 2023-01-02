@@ -1,35 +1,53 @@
 import styles from './AllPosts.module.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPosts } from '../../../../store/posts';
+import { addLike, getPosts, removeLike } from '../../../../store/posts';
 import CommentForm from './CommentForm/CommentForm';
 import { Ellipsis } from './Ellipsis/Ellipsis';
 import { CommentEllipsis } from './CommentEllipsis/CommentEllipsis';
 import EditCommentForm from './EditCommentForm/EditCommentForm';
 
-
 const AllPosts = ({ user }) => {
-    const count = 0;
+    const dispatch = useDispatch();
+    const [clicked, setClicked] = useState(false);
+
     const editComment = useSelector(state => state.commentDetails.comment);
     const posts = useSelector(state => state.posts);
     const allposts = posts.allPosts;
     const postArray = Object.values(allposts)
         .sort((a, b) => a.id < b.id ? 1 : -1);
-    const dispatch = useDispatch();
-    const [likeCount, setLikeCount] = useState(count);
-    const [clicked, setClicked] = useState(false);
 
     useEffect(() => {
         dispatch(getPosts());
     }, [dispatch]);
 
-    const handleLike = id => {
-        // e.preventDefault();
-        if (!clicked) setLikeCount(count + 1);
-        if (clicked) setLikeCount(likeCount - 1);
-        document.getElementById('like').className = styles.likeClicked;
-        setClicked(!clicked);
-    };
+
+    // const handleLikeAction = async post_id => {
+    //     const newLike = { post_id, user_id: user.id };
+
+    //     const targetPost = postArray.find(post => post.id === post_id);
+    //     const like = targetPost.likes.find(like => like.user_id === user.id);
+
+    //     if (like) { setClicked(true); }
+
+    //     if (targetPost.likes.length) {
+    //         if (!like && !clicked) {
+    //             await dispatch(addLike(newLike));
+    //             setClicked(true);
+    //         }
+    //         if (like && clicked) {
+    //             await dispatch(removeLike(newLike));
+    //             setClicked(false);
+    //         }
+    //     }
+    //     if (targetPost.likes.length === 0) {
+    //         if (!clicked) {
+    //             await dispatch(addLike(newLike));
+    //             setClicked(true);
+    //         }
+    //     }
+    // };
+
 
     return (
         <div>{postArray.map((post, i) =>
@@ -54,7 +72,7 @@ const AllPosts = ({ user }) => {
                         {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='' src={image.image_url} className={styles.image} onError={e => e.target.style.display = 'none'} />) : null}
                     </div>
 
-                    <div className={styles.postLikeCommentWrapper}>
+                    {/* <div className={styles.postLikeCommentWrapper}>
                         <div className={styles.postLikeInfo}>
                             <div className={styles.like}><i className="fa-regular fa-thumbs-up"></i>
                             </div>
@@ -63,11 +81,15 @@ const AllPosts = ({ user }) => {
                         <div className={styles.postCommentInfo}>
                             <div className={styles.count}>{`${post.comments.length} comments`}</div>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className={styles.actionWrapper}>
-                        <button className={styles.actionBtnWrapper} onClick={() => handleLike(post.id)}>
-                            <span className={!clicked ? styles.actionBtn : styles.likeClicked} id='like'>
+                    {/* <div className={styles.actionWrapper}>
+                        <button className={styles.actionBtnWrapper} onClick={() => {
+                            setClicked(!clicked);
+                            handleLikeAction(post.id);
+                        }}
+                        >
+                            <span className={post.likes.length ? (post.likes.map(like => like.user_id === user.id ? styles.likeClicked : styles.actionBtn)) : styles.actionBtn}>
                                 <div><i className="fa-regular fa-thumbs-up"></i></div>
                                 <div>Like</div>
                             </span>
@@ -79,7 +101,7 @@ const AllPosts = ({ user }) => {
                                 <div>Comment</div>
                             </span>
                         </button>
-                    </div>
+                    </div> */}
 
                     <div>
                         {post.comments.length ? post.comments.map((comment, i) =>

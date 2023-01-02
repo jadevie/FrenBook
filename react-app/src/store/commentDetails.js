@@ -1,5 +1,5 @@
 const SET_COMMENT_DETAILS = 'commentDetails/SET_COMMENT_DETAILS';
-const CLEAR_COMMENT_DETAILS = 'commentDetailsCLEAR_COMMENT_DETAILS';
+const CLEAR_COMMENT_DETAILS = 'commentDetails/CLEAR_COMMENT_DETAILS';
 
 export const setCommentDetails = id => async dispatch => {
     const response = await fetch(`/api/comments/${id}`);

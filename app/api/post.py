@@ -1,13 +1,13 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import db, Post, PostImage, Comment, User
+from app.models import db, Post, PostImage, Comment, Like
 from app.forms import PostForm, PostImageForm, CommentForm
 from .session import validation_errors_to_error_messages
 
 bp = Blueprint("posts", __name__, url_prefix="/posts")
 
 @bp.route("")
-# @login_required
+@login_required
 def get_posts():
     '''
     Get all posts from the most recent post
@@ -186,30 +186,32 @@ def post_comment(post_id):
 @login_required
 def add_like(post_id):
     post = Post.query.get(post_id)
-    user = User.query.get(current_user.id)
-
+    like = Like.query.filter_by(user_id = current_user.id, post_id = post_id).first()
     if not post:
         return {"message": "Post couldn't be found"}
 
-    if user not in post.post_likes :
-       post.post_likes.append(user)
-       db.session.commit()
-       return {'message': 'Like added'}
-
-    return {'message' : 'You already liked this post'}
+    if not like :
+        newLike = Like(
+            user_id = current_user.id,
+            post_id = post_id
+            )
+        db.session.add(newLike)
+        db.session.commit()
+        return  jsonify(newLike.to_dict())
+    return {"message" : "You already liked this post"}
 
 @bp.route('/<int:post_id>/likes/delete', methods =['DELETE'])
 @login_required
 def delete_like(post_id):
     post = Post.query.get(post_id)
-    user = User.query.get(current_user.id)
+    like = Like.query.filter_by(user_id = current_user.id, post_id=post_id).first()
 
     if not post:
         return {"message": "Post couldn't be found"}
 
-    if user in post.post_likes :
-        post.post_likes.remove(user)
+    if like :
+        db.session.delete(like)
         db.session.commit()
-        return {'message': 'Like removed'}
+        return {"message": "Like removed"}
 
-    return {'message': 'You have to like it first before removing your like'}
+    return {"message": "You have to like it first before removing your like"}

@@ -69,7 +69,7 @@ const CreatePostForm = () => {
                     onChange={e => setBody(e.target.value)}
                     value={body}
                     className={styles.body}
-                    required='true'
+                    required={true}
                 />
                 <label>
                     <div className={styles.photoIcon}>
