@@ -97,7 +97,7 @@ const EditPostForm = () => {
                             </label>}
 
                         <div>
-                            <button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>{oldImage ? 'handleDeleteImage' : 'handleChangeImage'}</button>
+                            <button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>x</button>
                         </div>
 
                         <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
