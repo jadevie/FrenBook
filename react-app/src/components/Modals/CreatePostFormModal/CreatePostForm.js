@@ -22,7 +22,7 @@ const CreatePostForm = () => {
                 setErrors(errors);
             });
 
-        if (newPost) {
+        if (newPost && image) {
             const id = newPost.id;
             await dispatch(addPostImage(id, image, preview))
                 .then(() => dispatch(setCreatePostModal(false)))
@@ -31,6 +31,7 @@ const CreatePostForm = () => {
                     setErrors(errors);
                 });
         }
+        else dispatch(setCreatePostModal(false))
     };
 
     const handleImage = e => {
@@ -69,7 +70,7 @@ const CreatePostForm = () => {
                     onChange={e => setBody(e.target.value)}
                     value={body}
                     className={styles.body}
-                    required='true'
+                    required={true}
                 />
                 <label>
                     <div className={styles.photoIcon}>

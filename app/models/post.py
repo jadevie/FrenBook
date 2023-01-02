@@ -2,7 +2,7 @@ from .db import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.types import Integer, DateTime, TEXT
-from sqlalchemy.schema import Column, ForeignKey
+from sqlalchemy.schema import Column, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 class Post(db.Model, UserMixin):
@@ -20,6 +20,7 @@ class Post(db.Model, UserMixin):
     user = relationship("User", foreign_keys=[user_id], back_populates="posts")
     images = relationship('PostImage',cascade="all, delete-orphan", back_populates='post')
     comments = relationship('Comment',cascade ='all, delete-orphan', back_populates='post')
+    likes = relationship("Like", backref='post', cascade="all, delete")
 
     def to_dict(self):
         return {
@@ -30,5 +31,6 @@ class Post(db.Model, UserMixin):
             'updated_at': self.updated_at,
             'user' : self.user.to_dict_no_posts(),
             'images': [image.to_dict() for image in self.images],
-            'comments': [comment.to_dict() for comment in self.comments]
+            'comments': [comment.to_dict() for comment in self.comments],
+            'likes': [like.to_dict() for like in self.likes]
         }

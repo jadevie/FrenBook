@@ -21,12 +21,15 @@ const EditPostForm = () => {
         e.preventDefault();
         const updatedPost = { body };
         await dispatch(updatePost(post.id, updatedPost));
-        await dispatch(addPostImage(post.id, image, preview))
-            .then(() => dispatch(setEditPostModal(false)))
-            .catch(e => {
-                const errors = e.errors;
-                setErrors(errors);
-            });
+        if (image) {
+            await dispatch(addPostImage(post.id, image, preview))
+                .then(() => dispatch(setEditPostModal(false)))
+                .catch(e => {
+                    const errors = e.errors;
+                    setErrors(errors);
+                });
+        }
+        else dispatch(setEditPostModal(false));
     };
 
     const handleImage = e => {
@@ -76,7 +79,7 @@ const EditPostForm = () => {
                             onChange={e => setBody(e.target.value)}
                             value={body}
                             className={styles.body}
-                            required='true'
+                            required={true}
                         />
                         {oldImage ? <img src={oldImage} alt='' className={styles.preview} id='del' onError={e => e.target.style.display = 'none'} /> :
                             <label>

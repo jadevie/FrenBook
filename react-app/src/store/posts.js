@@ -7,6 +7,8 @@ const DELETE_POST = 'posts/DELETE_POST';
 const EDIT_COMMENT = 'posts/EDIT_COMMENT';
 const DELETE_COMMENT = 'posts/DELETE_COMMENT';
 const DELETE_IMAGE = 'posts/DELETE_IMAGE';
+const ADD_LIKE = 'posts/ADD_LIKE';
+const REMOVE_LIKE = 'posts/REMOVE_LIKE';
 
 export const getPosts = () => async dispatch => {
     const response = await fetch(`/api/posts`);
@@ -61,7 +63,7 @@ export const updatePost = (id, post) => async dispatch => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch({ type: UPDATE_POST, post });
+        dispatch({ type: UPDATE_POST, post: data });
         return data;
     }
     if (response.status >= 400) {
@@ -121,6 +123,27 @@ export const deleteImage = (postId, imageId) => async dispatch => {
     dispatch({ type: DELETE_IMAGE, postId, imageId });
 };
 
+export const addLike = (like) => async dispatch => {
+    const response = await fetch(`api/posts/${like.post_id}/likes`, {
+        method: 'POST',
+        body: JSON.stringify(like)
+    });
+    if (response.ok) {
+        const data = await response.json();
+
+        dispatch({ type: ADD_LIKE, data });
+        return data;
+    }
+    if (response.status >= 400) {
+        const errors = await response.json();
+        throw errors;
+    }
+};
+
+export const removeLike = (like) => async dispatch => {
+    await fetch(`/api/posts/${like.post_id}/likes/delete`, { method: 'DELETE' });
+    dispatch({ type: REMOVE_LIKE, like });
+};
 
 const initialState = { allPosts: {}, post: {} };
 export default function postsReducer(state = initialState, action) {
@@ -131,6 +154,10 @@ export default function postsReducer(state = initialState, action) {
             action.posts.posts.forEach(post => newState.allPosts[post.id] = post);
             return newState;
         case CREATE_POST:
+            newState = { ...state };
+            newState.allPosts[action.post.id] = action.post;
+            return newState;
+        case UPDATE_POST:
             newState = { ...state };
             newState.allPosts[action.post.id] = action.post;
             return newState;
@@ -160,6 +187,17 @@ export default function postsReducer(state = initialState, action) {
             newState = { ...state };
             let array = newState.allPosts[action.comment.post_id].comments;
             array.forEach((comment, i) => comment.id === action.comment.id ? array.splice(i, 1) : null);
+            return newState;
+        case ADD_LIKE:
+            newState = { ...state };
+            newState.allPosts[action.data.post_id].likes.push(action.data);
+            return newState;
+        case REMOVE_LIKE:
+            newState = { ...state };
+            let likeArray = newState.allPosts[action.like.post_id].likes;
+            if (likeArray) {
+                likeArray.map((like, i) => like.user_id === action.like.user_id ? likeArray.splice(i, 1) : null);
+            }
             return newState;
         default:
             return state;

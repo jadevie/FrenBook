@@ -16,21 +16,19 @@ const SignUpForm = () => {
     const [day, setDay] = useState('1');
     const [year, setYear] = useState('2022');
     const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
     const onSignUp = async (e) => {
         const birthday = `${year}-${month}-0${day}`;
         e.preventDefault();
-        if (password === repeatPassword) {
-            await dispatch(signUp(firstName, lastName, username, email, password, gender, birthday))
-                .then(() => dispatch(setSignUpModal(false)))
-                .catch(e => {
-                    const errors = e.errors;
-                    setErrors(errors);
-                });
-        }
+        await dispatch(signUp(firstName, lastName, username, email, password, gender, birthday))
+            .then(() => dispatch(setSignUpModal(false)))
+            .catch(e => {
+                const errors = e.errors;
+                setErrors(errors);
+            });
+
         if (user) return <Redirect to='/' />;
     };
 
@@ -38,7 +36,7 @@ const SignUpForm = () => {
 
     const days = [...Array(31).keys()].map(index => index + 1);
 
-    const years = [...Array(118).keys()].map(index => index + 1905).sort((a, b) => b - a);
+    const years = [...Array(109).keys()].map(index => index + 1905).sort((a, b) => b - a);
 
 
 
@@ -48,34 +46,31 @@ const SignUpForm = () => {
                 <h3>Sign Up</h3>
                 <p>It's quick and easy.</p>
                 <form onSubmit={onSignUp} className={styles.form}>
-                    <div>
+                    <div className={styles.errors}>
                         {errors.length > 0 && errors.map((error, ind) => (
                             <div key={ind}>{error}</div>
                         ))}
                     </div>
                     <div className={styles.splitInput}>
-                        <div>
-                            <input
-                                type='text'
-                                placeholder='First Name'
-                                name='firstName'
-                                onChange={e => setFirstName(e.target.value)}
-                                value={firstName}
-                                required={true}
-                                className={styles.input}
-                            ></input>
-                        </div>
-                        <div>
-                            <input
-                                type='text'
-                                placeholder='Last Name'
-                                name='lastName'
-                                onChange={e => setLastName(e.target.value)}
-                                value={lastName}
-                                required={true}
-                                className={styles.input}
-                            ></input>
-                        </div>
+                        <input
+                            type='text'
+                            placeholder='First Name'
+                            name='firstName'
+                            onChange={e => setFirstName(e.target.value)}
+                            value={firstName}
+                            required={true}
+                            className={styles.input}
+                        />
+                        <input
+                            type='text'
+                            placeholder='Last Name'
+                            name='lastName'
+                            onChange={e => setLastName(e.target.value)}
+                            value={lastName}
+                            required={true}
+                            className={styles.input}
+                        />
+
                     </div>
                     <div>
                         <input
@@ -172,20 +167,15 @@ const SignUpForm = () => {
                             className={styles.input}
                         />
                     </div>
-                    <div>
-                        <input
-                            type='password'
-                            placeholder='Repeat Password'
-                            name='repeat_password'
-                            onChange={e => setRepeatPassword(e.target.value)}
-                            value={repeatPassword}
-                            required={true}
-                            className={styles.input}
-                        />
+                    <div className={styles.term}>
+                        People who use our service may have uploaded your contact information to Frenbook.
+                    </div>
+                    <div className={styles.term}>
+                        By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS Notifications from us and can opt out any time.
                     </div>
                     <button type='submit' className={styles.signupBtn}>Sign Up</button>
                 </form >
-            </div>
+            </div >
         </>
     );
 };

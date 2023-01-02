@@ -1,16 +1,16 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    width: 432px;
-    height: 540px;
+    width: 440px;
+    height: 600px;
     word-wrap: break-word;
-    margin-top: 40px;
+    margin-top: 20px;
     padding: 0px 15px;
 }
 
 h3 {
-    font-size: 32px;
-    line-height: 38px;
+    font-size: 30px;
+    line-height: 30px;
 }
 
 p {
@@ -21,12 +21,21 @@ p {
 }
 
 .form {
-    padding-top: 15px;
+    padding-top: 10px;
 }
+
+.errors {
+    height: 35px;
+    color: #F02849;
+    font-size: 13px;
+    line-height: 16px;
+}
+
 
 .splitInput {
     display: flex;
     justify-content: space-between;
+    gap: 10px
 }
 
 .input {
@@ -76,9 +85,15 @@ p {
     font-weight: bold;
     padding: 8px 32px;
     margin-left: 100px;
+    margin-top: 20px
 }
 
 .signupBtn:hover {
     background: #578843;
     background-color: #69a74e;
+}
+
+.term {
+    font-size: 12px;
+    padding-top: 10px;
 }

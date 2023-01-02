@@ -1,13 +1,12 @@
 import "./App.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { restoreUser } from "./store/session";
 import Modals from "./components/Modals/Modals";
 import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import SplashPage from "./components/SplashPage/SplashPage";
-
+import { restoreUser } from './store/session';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export default function App() {
   return (
     <>
       <div>
-        <Route path='/'>
+        <Route path='/' exact={true}>
           {!user ? <SplashPage /> : <HomePage />}
         </Route>
         <Modals />

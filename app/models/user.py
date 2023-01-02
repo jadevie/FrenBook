@@ -30,6 +30,8 @@ class User(db.Model, UserMixin):
 
     comments = relationship('Comment', back_populates='user')
 
+    likes = relationship("Like", backref='users', cascade="all, delete")
+
 
     @property
     def password(self):
@@ -52,7 +54,7 @@ class User(db.Model, UserMixin):
             'birthday': self.birthday,
             'gender': self.gender,
             'profile_picture_url': self.profile_picture_url,
-            'posts' : [post.to_dict() for post in self.posts],
+            'likes': [like.to_dict() for like in self.likes]
         }
 
     def to_dict_no_posts(self):
