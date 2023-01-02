@@ -21,12 +21,15 @@ const EditPostForm = () => {
         e.preventDefault();
         const updatedPost = { body };
         await dispatch(updatePost(post.id, updatedPost));
-        await dispatch(addPostImage(post.id, image, preview))
-            .then(() => dispatch(setEditPostModal(false)))
-            .catch(e => {
-                const errors = e.errors;
-                setErrors(errors);
-            });
+        if (image) {
+            await dispatch(addPostImage(post.id, image, preview))
+                .then(() => dispatch(setEditPostModal(false)))
+                .catch(e => {
+                    const errors = e.errors;
+                    setErrors(errors);
+                });
+        }
+        else dispatch(setEditPostModal(false));
     };
 
     const handleImage = e => {
@@ -94,7 +97,7 @@ const EditPostForm = () => {
                             </label>}
 
                         <div>
-                            <button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>x</button>
+                            <button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>{oldImage ? 'handleDeleteImage' : 'handleChangeImage'}</button>
                         </div>
 
                         <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />

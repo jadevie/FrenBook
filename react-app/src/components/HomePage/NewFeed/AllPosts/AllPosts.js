@@ -81,9 +81,9 @@ const AllPosts = ({ user }) => {
                         <div className={styles.postCommentInfo}>
                             <div className={styles.count}>{`${post.comments.length} comments`}</div>
                         </div>
-                    </div> */}
+                    </div>
 
-                    {/* <div className={styles.actionWrapper}>
+                    <div className={styles.actionWrapper}>
                         <button className={styles.actionBtnWrapper} onClick={() => {
                             setClicked(!clicked);
                             handleLikeAction(post.id);
