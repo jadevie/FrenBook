@@ -84,9 +84,14 @@ const AllPosts = ({ user }) => {
                             </span>
                         </button>
 
-                        <button className={styles.actionBtnWrapper}>
+                        <button className={styles.actionBtnWrapper} onClick={e => {
+                            e.preventDefault();
+                            document.getElementById(i).focus();
+                        }}>
                             <span className={styles.actionBtn}>
-                                <div><i className="fa-regular fa-message"></i></div>
+                                <div>
+                                    <i className="fa-regular fa-message"></i>
+                                </div>
                                 <div>Comment</div>
                             </span>
                         </button>
@@ -115,7 +120,7 @@ const AllPosts = ({ user }) => {
                         <div className={styles.userImageSmall}>
                             <img src={`${user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
                         </div>
-                        <CommentForm post={post} />
+                        <CommentForm post={post} i={i} />
                     </div>
                 </div>
             </div>

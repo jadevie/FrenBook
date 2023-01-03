@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addComment } from '../../../../../store/posts';
 import TextareaAutosize from 'react-autosize-textarea';
 
-const CommentForm = ({ post }) => {
+const CommentForm = ({ post, i }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState('');
     const [id, setId] = useState(0);
@@ -12,8 +12,10 @@ const CommentForm = ({ post }) => {
     const handleOnSubmit = async e => {
         if (e) e.preventDefault();
         const comment = { body };
-        await dispatch(addComment(id, comment))
-            .then(() => setBody(''));
+        if (body.trim().length) {
+            await dispatch(addComment(id, comment))
+                .then(() => setBody(''));
+        }
     };
 
     return (
@@ -21,6 +23,7 @@ const CommentForm = ({ post }) => {
             <div>
                 <form className={styles.addCommentWrapper}>
                     <TextareaAutosize
+                        id={i}
                         value={body}
                         onChange={e => {
                             setId(post.id);
@@ -29,7 +32,6 @@ const CommentForm = ({ post }) => {
                         placeholder='Write a comment'
                         className={styles.commentInput}
                         type='submit'
-
                         onKeyDown={e => {
                             if (e.which === 13 && !e.shiftKey) {
                                 handleOnSubmit();

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { clearCommentDetails } from '../../../../../store/commentDetails';
 import { editComment } from '../../../../../store/posts';
 import TextareaAutosize from 'react-autosize-textarea';
+import { setDeleteCommentModal } from '../../../../../store/ui';
 
 const EditCommentForm = ({ comment }) => {
     const dispatch = useDispatch();
@@ -13,7 +14,8 @@ const EditCommentForm = ({ comment }) => {
     const handleOnSubmit = async e => {
         if (e) e.preventDefault();
         const comment = { body };
-        await dispatch(editComment(id, comment))
+        if (!body.trim().length) dispatch(setDeleteCommentModal(true));
+        else await dispatch(editComment(id, comment))
             .then(() => dispatch(clearCommentDetails()));
     };
 
