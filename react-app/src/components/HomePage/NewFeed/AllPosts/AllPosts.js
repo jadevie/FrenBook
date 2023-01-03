@@ -1,5 +1,5 @@
 import styles from './AllPosts.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLike, getPosts, removeLike } from '../../../../store/posts';
 import CommentForm from './CommentForm/CommentForm';

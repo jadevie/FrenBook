@@ -31,7 +31,7 @@ const CreatePostForm = () => {
                     setErrors(errors);
                 });
         }
-        else dispatch(setCreatePostModal(false))
+        else dispatch(setCreatePostModal(false));
     };
 
     const handleImage = e => {

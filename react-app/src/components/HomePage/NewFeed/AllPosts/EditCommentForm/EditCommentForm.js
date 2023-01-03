@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearCommentDetails } from '../../../../../store/commentDetails';
 import { editComment } from '../../../../../store/posts';
-
+import TextareaAutosize from 'react-autosize-textarea';
 
 const EditCommentForm = ({ comment }) => {
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const EditCommentForm = ({ comment }) => {
     const [id, setId] = useState(comment.id);
 
     const handleOnSubmit = async e => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         const comment = { body };
         await dispatch(editComment(id, comment))
             .then(() => dispatch(clearCommentDetails()));
@@ -20,19 +20,21 @@ const EditCommentForm = ({ comment }) => {
     return (
         <div>
             <div>
-                <form onSubmit={handleOnSubmit} >
-                    <textarea
-                        id='textarea'
+                <form>
+                    <TextareaAutosize
                         className={styles.editInput}
-                        name='edit'
-                        type='text'
+                        type='submit'
                         onChange={e => {
                             setId(comment.id);
                             setBody(e.target.value);
                         }}
                         value={body}
+                        onKeyDown={e => {
+                            if (e.which === 13 && !e.shiftKey) {
+                                handleOnSubmit();
+                            }
+                        }}
                     />
-                    <button type='submit' className={`${styles.post} ${body ? styles.ready : styles.notReady}`} >Post</button>
                 </form>
             </div>
         </div>
