@@ -12,31 +12,26 @@ const CreatePostForm = () => {
     const [preview, setPreview] = useState(null);
     const [errors, setErrors] = useState([]);
 
-
-
     const onSubmit = async e => {
         e.preventDefault();
         const post = { body };
-        if (post) {
-            const newPost = await dispatch(addPost(post))
+        const newPost = await dispatch(addPost(post))
+            .catch(e => {
+                const errors = e.errors;
+                setErrors(errors);
+            });
+        if (newPost && image) {
+            const id = newPost.id;
+            await dispatch(addPostImage(id, image, preview))
+                .then(() => dispatch(setCreatePostModal(false)))
                 .catch(e => {
                     const errors = e.errors;
                     setErrors(errors);
                 });
-
-            if (newPost && image) {
-                const id = newPost.id;
-                await dispatch(addPostImage(id, image, preview))
-                    .then(() => dispatch(setCreatePostModal(false)))
-                    .catch(e => {
-                        const errors = e.errors;
-                        setErrors(errors);
-                    });
-            }
         }
         else dispatch(setCreatePostModal(false));
-    };
 
+    };
     const handleImage = e => {
         // Show thumbnail preview before submit post
         e.preventDefault();
@@ -73,7 +68,7 @@ const CreatePostForm = () => {
                     onChange={e => setBody(e.target.value)}
                     value={body}
                     className={styles.body}
-
+                    required={true}
                 />
                 <label>
                     <div className={styles.photoIcon}>
