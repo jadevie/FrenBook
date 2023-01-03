@@ -1,32 +1,15 @@
 .editInput {
     border: none;
     outline: none;
+    resize: none;
     background-color: #e4e7eb;
     color: #050505;
     font-size: 16px;
-    width: 90%;
-    min-height: 90%;
+    min-width: 100%;
+    min-height: 100%;
     word-wrap: break-word;
     overflow: hidden;
     position: absolute;
     border-radius: 10px;
     padding: 5px;
-    resize: none;
-}
-
-.post {
-    font-weight: bold;
-    position: absolute;
-    margin-left: 385px;
-    padding: 5px 8px;
-}
-
-.post:hover {
-    background-color: #F0F2F5;
-    border-radius: 50%;
-}
-
-.notReady {
-    cursor: not-allowed;
-    color: #e4e7eb
 }

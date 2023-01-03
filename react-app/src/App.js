@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Modals from "./components/Modals/Modals";
 import { useSelector } from "react-redux";
-import { Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import SplashPage from "./components/SplashPage/SplashPage";
 import { restoreUser } from './store/session';
+
 
 export default function App() {
   const dispatch = useDispatch();

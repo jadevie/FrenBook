@@ -2,45 +2,54 @@ import styles from './CommentForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../../../../../store/posts';
+import TextareaAutosize from 'react-autosize-textarea';
 
-
-const CommentForm = ({ post }) => {
+const CommentForm = ({ post, i }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState('');
     const [id, setId] = useState(0);
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const handleOnSubmit = async e => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         const comment = { body };
         await dispatch(addComment(id, comment))
-            .then(() => setBody(''));
-        // .catch(e => {
-        //     setErrors(e.errors);
-        // });
+            .catch(e => {
+                const errors = e.errors;
+                setErrors(errors);
+            });
+        setBody('');
+    };
+
+    const onEnter = e => {
+        if (e.which === 13 && !e.shiftKey) {
+            handleOnSubmit();
+        }
     };
 
     return (
         <div>
             <div>
-                <form onSubmit={handleOnSubmit} className={styles.addCommentWrapper}>
-                    <div>
-                        {/* {errors.length > 0 && errors.map((error, ind) => (
-                            <div key={ind}>{error}</div>
-                        ))} */}
-                    </div>
-                    <textarea
-                        className={styles.commentInput}
-                        type='text'
-                        placeholder='Write a comment'
+                <form className={styles.addCommentWrapper}>
+                    <TextareaAutosize
+                        id={i}
+                        value={body}
                         onChange={e => {
                             setId(post.id);
                             setBody(e.target.value);
+                            setErrors([]);
                         }}
-                        value={body}
+                        placeholder='Write a comment'
+                        className={styles.commentInput}
+                        type='submit'
+                        onKeyDown={onEnter}
                     />
-                    <button className={`${styles.post} ${body ? styles.ready : styles.notReady}`} type='submit' disabled={body ? false : true}>Post</button>
                 </form>
+                <div>
+                    {errors && errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
             </div>
         </div>
     );

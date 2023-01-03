@@ -12,7 +12,6 @@ const CreatePostForm = () => {
     const [preview, setPreview] = useState(null);
     const [errors, setErrors] = useState([]);
 
-
     const onSubmit = async e => {
         e.preventDefault();
         const post = { body };
@@ -21,7 +20,6 @@ const CreatePostForm = () => {
                 const errors = e.errors;
                 setErrors(errors);
             });
-
         if (newPost && image) {
             const id = newPost.id;
             await dispatch(addPostImage(id, image, preview))
@@ -31,9 +29,9 @@ const CreatePostForm = () => {
                     setErrors(errors);
                 });
         }
-        else dispatch(setCreatePostModal(false))
-    };
+        else dispatch(setCreatePostModal(false));
 
+    };
     const handleImage = e => {
         // Show thumbnail preview before submit post
         e.preventDefault();
@@ -90,7 +88,7 @@ const CreatePostForm = () => {
 
                 <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
 
-                <button type='submit' className={`${styles.post} ${body ? styles.ready : styles.notReadyPost}`} disabled={body ? false : true}>Post</button>
+                <button type='submit' className={`${styles.post} ${(body.trim().length || preview) ? styles.ready : styles.notReadyPost}`} disabled={body.trim().length || preview ? false : true}>Post</button>
             </form>
         </div >
     );

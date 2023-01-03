@@ -1,5 +1,5 @@
 import styles from './AllPosts.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLike, getPosts, removeLike } from '../../../../store/posts';
 import CommentForm from './CommentForm/CommentForm';
@@ -9,7 +9,6 @@ import EditCommentForm from './EditCommentForm/EditCommentForm';
 
 const AllPosts = ({ user }) => {
     const dispatch = useDispatch();
-    const [clicked, setClicked] = useState(false);
 
     const editComment = useSelector(state => state.commentDetails.comment);
     const posts = useSelector(state => state.posts);
@@ -22,32 +21,26 @@ const AllPosts = ({ user }) => {
     }, [dispatch]);
 
 
-    // const handleLikeAction = async post_id => {
-    //     const newLike = { post_id, user_id: user.id };
+    const handleLikeAction = async post_id => {
+        const newLike = { post_id, user_id: user.id };
+        const targetPost = postArray.find(post => post.id === post_id);
+        const like = targetPost.likes.find(like => like.user_id === user.id);
 
-    //     const targetPost = postArray.find(post => post.id === post_id);
-    //     const like = targetPost.likes.find(like => like.user_id === user.id);
+        if (targetPost.likes.length) {
+            if (!like) {
+                await dispatch(addLike(newLike));
+            }
 
-    //     if (like) { setClicked(true); }
-
-    //     if (targetPost.likes.length) {
-    //         if (!like && !clicked) {
-    //             await dispatch(addLike(newLike));
-    //             setClicked(true);
-    //         }
-    //         if (like && clicked) {
-    //             await dispatch(removeLike(newLike));
-    //             setClicked(false);
-    //         }
-    //     }
-    //     if (targetPost.likes.length === 0) {
-    //         if (!clicked) {
-    //             await dispatch(addLike(newLike));
-    //             setClicked(true);
-    //         }
-    //     }
-    // };
-
+            if (like) {
+                await dispatch(removeLike(newLike));
+            }
+        }
+        if (targetPost.likes.length === 0) {
+            if (!like) {
+                await dispatch(addLike(newLike));
+            }
+        }
+    };
 
     return (
         <div>{postArray.map((post, i) =>
@@ -72,7 +65,7 @@ const AllPosts = ({ user }) => {
                         {post.images.length ? post.images.map((image, i) => <img key={i} id='postImage' alt='' src={image.image_url} className={styles.image} onError={e => e.target.style.display = 'none'} />) : null}
                     </div>
 
-                    {/* <div className={styles.postLikeCommentWrapper}>
+                    <div className={styles.postLikeCommentWrapper}>
                         <div className={styles.postLikeInfo}>
                             <div className={styles.like}><i className="fa-regular fa-thumbs-up"></i>
                             </div>
@@ -84,24 +77,25 @@ const AllPosts = ({ user }) => {
                     </div>
 
                     <div className={styles.actionWrapper}>
-                        <button className={styles.actionBtnWrapper} onClick={() => {
-                            setClicked(!clicked);
-                            handleLikeAction(post.id);
-                        }}
-                        >
-                            <span className={post.likes.length ? (post.likes.map(like => like.user_id === user.id ? styles.likeClicked : styles.actionBtn)) : styles.actionBtn}>
+                        <button className={styles.actionBtnWrapper} onClick={() => handleLikeAction(post.id)} >
+                            <span className={post.likes.find(like => like.user_id === user.id) ? styles.likeClicked : styles.actionBtn} >
                                 <div><i className="fa-regular fa-thumbs-up"></i></div>
                                 <div>Like</div>
                             </span>
                         </button>
 
-                        <button className={styles.actionBtnWrapper}>
+                        <button className={styles.actionBtnWrapper} onClick={e => {
+                            e.preventDefault();
+                            document.getElementById(i).focus();
+                        }}>
                             <span className={styles.actionBtn}>
-                                <div><i className="fa-regular fa-message"></i></div>
+                                <div>
+                                    <i className="fa-regular fa-message"></i>
+                                </div>
                                 <div>Comment</div>
                             </span>
                         </button>
-                    </div> */}
+                    </div>
 
                     <div>
                         {post.comments.length ? post.comments.map((comment, i) =>
@@ -126,7 +120,7 @@ const AllPosts = ({ user }) => {
                         <div className={styles.userImageSmall}>
                             <img src={`${user.profile_picture_url}`} alt='profile' className={styles.userImageSmall} />
                         </div>
-                        <CommentForm post={post} />
+                        <CommentForm post={post} i={i} />
                     </div>
                 </div>
             </div>
