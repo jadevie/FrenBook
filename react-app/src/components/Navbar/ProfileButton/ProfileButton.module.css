@@ -1,3 +1,22 @@
+.wrapper {
+    display: flex;
+    gap: 10px
+}
+
+.iconWrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #E4E6EB
+}
+
+
+.navIcons {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
 .profilePicture {
     width: 40px;
     height: 40px;
