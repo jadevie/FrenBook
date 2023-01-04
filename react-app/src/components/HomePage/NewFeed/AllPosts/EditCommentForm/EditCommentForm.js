@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearCommentDetails } from '../../../../../store/commentDetails';
 import { editComment } from '../../../../../store/posts';
-import TextareaAutosize from 'react-autosize-textarea';
+// import TextareaAutosize from 'react-autosize-textarea';
 import { setDeleteCommentModal } from '../../../../../store/ui';
 
 const EditCommentForm = ({ comment }) => {
@@ -23,7 +23,8 @@ const EditCommentForm = ({ comment }) => {
         <div>
             <div>
                 <form>
-                    <TextareaAutosize
+                    {/* <TextareaAutosize */}
+                    <textarea
                         className={styles.editInput}
                         type='submit'
                         onChange={e => {

@@ -2,7 +2,7 @@ import styles from './CommentForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../../../../../store/posts';
-import TextareaAutosize from 'react-autosize-textarea';
+// import TextareaAutosize from 'react-autosize-textarea';
 
 const CommentForm = ({ post, i }) => {
     const dispatch = useDispatch();
@@ -31,7 +31,8 @@ const CommentForm = ({ post, i }) => {
         <div>
             <div>
                 <form className={styles.addCommentWrapper}>
-                    <TextareaAutosize
+                    {/* <TextareaAutosize */}
+                    <textarea
                         id={i}
                         value={body}
                         onChange={e => {
