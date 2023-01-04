@@ -20,6 +20,7 @@ const CreatePostForm = () => {
                 const errors = e.errors;
                 setErrors(errors);
             });
+
         if (newPost && image) {
             const id = newPost.id;
             await dispatch(addPostImage(id, image, preview))
@@ -30,7 +31,6 @@ const CreatePostForm = () => {
                 });
         }
         else dispatch(setCreatePostModal(false));
-
     };
     const handleImage = e => {
         // Show thumbnail preview before submit post
