@@ -1,8 +1,8 @@
 import styles from './EditPostForm.module.css';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPostImage, deleteImage, updatePost } from '../../../store/posts';
-import { setEditPostModal } from '../../../store/ui';
+import { addPostImage, deleteImage, deletePost, updatePost } from '../../../store/posts';
+import { setDeletePostModal, setEditPostModal } from '../../../store/ui';
 
 
 const EditPostForm = () => {
@@ -20,7 +20,12 @@ const EditPostForm = () => {
     const onSubmit = async e => {
         e.preventDefault();
         const updatedPost = { body };
-        await dispatch(updatePost(post.id, updatedPost));
+        if (!body.trim().length && !oldImage) {
+            dispatch(setDeletePostModal(true));
+        }
+
+        else await dispatch(updatePost(post.id, updatedPost));
+
         if (image) {
             await dispatch(addPostImage(post.id, image, preview))
                 .then(() => dispatch(setEditPostModal(false)))
@@ -58,6 +63,8 @@ const EditPostForm = () => {
         setOldImage('');
     };
 
+
+
     return (
         <div>
             <div className={styles.wrapper}>
@@ -79,7 +86,6 @@ const EditPostForm = () => {
                             onChange={e => setBody(e.target.value)}
                             value={body}
                             className={styles.body}
-                            required={true}
                         />
                         {oldImage ? <img src={oldImage} alt='' className={styles.preview} id='del' onError={e => e.target.style.display = 'none'} /> :
                             <label>
@@ -97,12 +103,11 @@ const EditPostForm = () => {
                             </label>}
 
                         <div>
-                            <button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={styles.changeImage}>x</button>
+                            <button onClick={oldImage ? handleDeleteImage : handleChangeImage} className={preview ? styles.changeImage : styles.notReady}>x</button>
                         </div>
 
                         <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
-
-                        <button type='submit' className={`${body ? styles.ready : styles.notReadyPost} ${oldImage ? styles.newPost : styles.post}`} disabled={body ? false : true}>Post</button>
+                        <button type='submit' className={`${oldImage || preview || body.trim().length ? styles.ready : styles.notReadyPost} ${oldImage ? styles.newPost : styles.post}`} disabled={preview || body.trim().length ? false : true}>Post</button>
                     </form>
                 </div>
             </div>
