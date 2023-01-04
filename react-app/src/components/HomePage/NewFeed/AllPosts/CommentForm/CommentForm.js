@@ -7,7 +7,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 const CommentForm = ({ post, i }) => {
     const dispatch = useDispatch();
     const [body, setBody] = useState('');
-    const [id, setId] = useState(0);
+    const [id, setId] = useState(1);
     const [errors, setErrors] = useState([]);
 
     const handleOnSubmit = async e => {
@@ -43,6 +43,7 @@ const CommentForm = ({ post, i }) => {
                         className={styles.commentInput}
                         type='submit'
                         onKeyDown={onEnter}
+
                     />
                 </form>
                 <div>
