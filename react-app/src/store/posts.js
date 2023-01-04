@@ -176,7 +176,8 @@ export default function postsReducer(state = initialState, action) {
             return newState;
         case ADD_COMMENT:
             newState = { ...state };
-            newState.allPosts[action.comment.post_id].comments.push(action.comment);
+            const post = newState.allPosts[action.comment.post_id];
+            post.comments.push(action.comment);
             return newState;
         case EDIT_COMMENT:
             newState = { ...state };

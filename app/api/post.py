@@ -166,7 +166,7 @@ def post_comment(post_id):
 
     post = Post.query.get(post_id)
     if not post:
-        return {"message": "Post couldn't be found"}
+        return {'message': 'Post not found'}, 400
 
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
