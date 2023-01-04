@@ -12,12 +12,14 @@ const CommentForm = ({ post, i }) => {
 
     const handleOnSubmit = async e => {
         if (e) e.preventDefault();
-        
+
         const comment = { body };
+
         await dispatch(addComment(id, comment))
             .catch(e => {
                 const errors = e.errors;
                 setErrors(errors);
+
             });
         setBody('');
     };
