@@ -84,7 +84,7 @@ const CreatePostForm = () => {
                     />
                 </label>
 
-                <div><button onClick={handleChangeImage} className={styles.changeImage}>x</button></div>
+                <div><button onClick={handleChangeImage} className={preview ? styles.changeImage : styles.notReady}>x</button></div>
 
                 <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
 
