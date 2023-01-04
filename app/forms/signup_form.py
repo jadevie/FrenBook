@@ -19,13 +19,33 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username is already in use.')
 
+def long_first_name(form, field):
+    if (len(form.data['first_name']) > 25 ):
+        raise ValidationError("First name can't be longer than 25 characters")
+
+def long_last_name(form,field):
+    if (len(form.data['last_name']) > 25):
+        raise ValidationError("Last name can't be longer than 25 characters")
+
+def long_username(form,field):
+    if (len(form.data['username']) > 15):
+        raise ValidationError("Username can't be longer than 15 characters")
+
+def long_email(form,field):
+    if (len(form.data['email']) > 100):
+        raise ValidationError("Username can't be longer than 100 characters")
+
+def long_password(form,field):
+    if (len(form.data['password']) > 8):
+        raise ValidationError("Password can't be longer than 8 characters")
+
 
 class SignUpForm(FlaskForm):
-    first_name = StringField('first_name')
-    last_name = StringField('last_name')
-    username = StringField('username', validators=[DataRequired(), username_exists])
-    email = EmailField('email', validators=[DataRequired(), user_exists, Email()])
-    password = PasswordField('password', validators=[DataRequired()])
+    first_name = StringField('first_name', validators=[long_first_name])
+    last_name = StringField('last_name', validators=[long_last_name])
+    username = StringField('username', validators=[DataRequired(), username_exists, long_username])
+    email = EmailField('email', validators=[DataRequired(), user_exists, Email(), long_email])
+    password = PasswordField('password', validators=[DataRequired(), long_password])
     birthday = DateField('birthday')
     gender = StringField('gender')
     # profile_picture_url = URLField('profile picture', validators=[URL()])
