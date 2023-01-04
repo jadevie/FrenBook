@@ -1,7 +1,7 @@
 """Create tables
 
 Revision ID: 509e4e8b79b1
-Revises: 
+Revises:
 Create Date: 2023-01-01 13:43:23.164074
 
 """
@@ -37,7 +37,7 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('body', sa.TEXT(), nullable=False),
+    sa.Column('body', sa.TEXT(), nullable=True),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
