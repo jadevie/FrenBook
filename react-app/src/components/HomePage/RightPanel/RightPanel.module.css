@@ -1,0 +1,30 @@
+.wrapper {
+    margin-left: 10px
+}
+
+.sponsorWrapper {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    gap: 20px
+}
+
+.infoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    text-align: left;
+
+}
+
+.link {
+    display: flex;
+    gap: 10px
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+}
