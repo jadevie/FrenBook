@@ -19,7 +19,7 @@ function Root() {
     <Provider store={store}>
       <ModalProvider>
         <BrowserRouter>
-      <App />
+          <App />
         </BrowserRouter>
       </ModalProvider>
     </Provider>
