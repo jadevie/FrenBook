@@ -16,18 +16,25 @@ const SignUpForm = () => {
     const [day, setDay] = useState('1');
     const [year, setYear] = useState('2022');
     const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
     const onSignUp = async (e) => {
         const birthday = `${year}-${month}-0${day}`;
         e.preventDefault();
-        await dispatch(signUp(firstName, lastName, username, email, password, gender, birthday))
-            .then(() => dispatch(setSignUpModal(false)))
-            .catch(e => {
-                const errors = e.errors;
-                setErrors(errors);
-            });
+        if (password === repeatPassword) {
+            await dispatch(signUp(firstName, lastName, username, email, password, gender, birthday))
+                .then(() => dispatch(setSignUpModal(false)))
+                .catch(e => {
+                    const errors = e.errors;
+                    setErrors(errors);
+                    console.log(errors);
+                });
+        }
+        else {
+            setErrors(["Password must be matched"]);
+        }
 
         if (user) return <Redirect to='/' />;
     };
@@ -166,6 +173,17 @@ const SignUpForm = () => {
                             value={password}
                             className={styles.input}
                         />
+                    </div>
+                    <div>
+                        <input
+                            placeholder='Repeat Password'
+                            type='password'
+                            name='repeat_password'
+                            onChange={e => setRepeatPassword(e.target.value)}
+                            value={repeatPassword}
+                            required={true}
+                            className={styles.input}
+                        ></input>
                     </div>
                     <div className={styles.term}>
                         People who use our service may have uploaded your contact information to Frenbook.
