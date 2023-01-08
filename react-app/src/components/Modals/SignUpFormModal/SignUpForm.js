@@ -29,7 +29,6 @@ const SignUpForm = () => {
                 .catch(e => {
                     const errors = e.errors;
                     setErrors(errors);
-                    console.log(errors);
                 });
         }
         else {
