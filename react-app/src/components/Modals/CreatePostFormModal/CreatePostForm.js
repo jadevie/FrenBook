@@ -20,7 +20,7 @@ const CreatePostForm = () => {
                 const errors = e.errors;
                 setErrors(errors);
             });
-        console.log(errors);
+      
         if (newPost && image) {
             const id = newPost.id;
             await dispatch(addPostImage(id, image, preview))
