@@ -20,11 +20,7 @@ const EditPostForm = () => {
     const onSubmit = async e => {
         e.preventDefault();
         const updatedPost = { body };
-        if (!body.trim().length && !oldImage) {
-            dispatch(setDeletePostModal(true));
-        }
-
-        else await dispatch(updatePost(post.id, updatedPost));
+        await dispatch(updatePost(post.id, updatedPost));
 
         if (image) {
             await dispatch(addPostImage(post.id, image, preview))
@@ -34,6 +30,7 @@ const EditPostForm = () => {
                     setErrors(errors);
                 });
         }
+
         else dispatch(setEditPostModal(false));
     };
 
@@ -107,7 +104,8 @@ const EditPostForm = () => {
                         </div>
 
                         <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
-                        <button type='submit' className={`${oldImage || preview || body.trim().length ? styles.ready : styles.notReadyPost} ${oldImage ? styles.newPost : styles.post}`} disabled={preview || body.trim().length ? false : true}>Post</button>
+
+                        <button type='submit' className={`${oldImage || preview || body.trim().length ? styles.ready : styles.notReadyPost} ${oldImage ? styles.newPost : styles.post}`} disabled={preview || oldImage || body.trim().length ? false : true}>Post</button>
                     </form>
                 </div>
             </div>
