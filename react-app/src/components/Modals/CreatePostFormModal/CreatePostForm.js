@@ -15,12 +15,13 @@ const CreatePostForm = () => {
     const onSubmit = async e => {
         e.preventDefault();
         const post = { body };
+
         const newPost = await dispatch(addPost(post))
             .catch(e => {
                 const errors = e.errors;
                 setErrors(errors);
             });
-      
+
         if (newPost && image) {
             const id = newPost.id;
             await dispatch(addPostImage(id, image, preview))
@@ -35,13 +36,13 @@ const CreatePostForm = () => {
     const handleImage = e => {
         // Show thumbnail preview before submit post
         e.preventDefault();
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0]); // FileList
         const reader = new FileReader();
         reader.onload = function (e) {
             e.preventDefault();
-            setPreview(e.target.result);
+            setPreview(e.target.result); // base64 of that photo
         };
-        reader.readAsDataURL(e.target.files[0]);
+        reader.readAsDataURL(e.target.files[0]); // create buffer sequence to allow us to pass image as a tring
     };
 
     const handleChangeImage = e => {
@@ -68,7 +69,6 @@ const CreatePostForm = () => {
                     onChange={e => setBody(e.target.value)}
                     value={body}
                     className={styles.body}
-                // required={true}
                 />
                 <label>
                     <div className={styles.photoIcon}>
@@ -86,7 +86,7 @@ const CreatePostForm = () => {
 
                 <div><button onClick={handleChangeImage} className={preview ? styles.changeImage : styles.notReady}>x</button></div>
 
-                <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />
+                <img id='postImage' alt='' src={preview && URL.createObjectURL(image)} className={`${preview ? styles.preview : styles.notReady}`} />b
 
                 <button type='submit' className={`${styles.post} ${(body.trim().length || preview) ? styles.ready : styles.notReadyPost}`} disabled={body.trim().length || preview ? false : true}>Post</button>
             </form>

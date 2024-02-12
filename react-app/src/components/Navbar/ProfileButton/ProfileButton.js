@@ -17,32 +17,35 @@ export const ProfileButton = () => {
     }, [showMenu]);
 
     return (
-        <>
-            <div className={styles.wrapper}>
-                <div className={styles.iconWrapper}>
-                    <a href='https://www.linkedin.com/in/jadetran603/' target="#">
-                        <div className={styles.navIcons} >
-                            <i className="fa-brands fa-linkedin"></i>
-                        </div>
-                    </a>
-                </div>
+      <>
+        <div className={styles.wrapper}>
+          <div className={styles.iconWrapper}>
+            <a href="https://www.linkedin.com/in/jadevtran/" target="#">
+              <div className={styles.navIcons}>
+                <i className="fa-brands fa-linkedin"></i>
+              </div>
+            </a>
+          </div>
 
-                <div className={styles.iconWrapper}>
-                    <a href='https://github.com/jadevie' target="#">
-                        <div className={styles.navIcons}  >
-                            <i className="fa-brands fa-github"></i>
-                        </div>
-                    </a>
-                </div>
+          <div className={styles.iconWrapper}>
+            <a href="https://github.com/jadevie" target="#">
+              <div className={styles.navIcons}>
+                <i className="fa-brands fa-github"></i>
+              </div>
+            </a>
+          </div>
 
-                <div>
-                    <button onClick={() => setShowMenu(true)}>
-                        <img src={user.profile_picture_url} alt='userPhoto' className={styles.profilePicture} />
-                    </button>
-                    {showMenu && <DropdownMenu user={user} />}
-                </div>
-            </div>
-        </>
-
+          <div>
+            <button onClick={() => setShowMenu(true)}>
+              <img
+                src={user.profile_picture_url}
+                alt="userPhoto"
+                className={styles.profilePicture}
+              />
+            </button>
+            {showMenu && <DropdownMenu user={user} />}
+          </div>
+        </div>
+      </>
     );
 };
